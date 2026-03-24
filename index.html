@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulator.IA — Inteligencia Artificial para Asuntos Regulatorios Agroquímicos</title>
+<meta name="description" content="Plataforma de agentes IA para equipos regulatorios en agroquímica. Automatiza expedientes SAG, análisis QSAR, gestión documental y seguimiento de registros en Chile y LATAM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#1a1a2e; background:#fff; line-height:1.6; -webkit-font-smoothing:antialiased; }
+a { text-decoration:none; color:inherit; }
+img { max-width:100%; display:block; }
+:root {
+  --green-primary: #5AAD2D;
+  --green-dark: #2B5A14;
+  --green-darker: #1a3d0d;
+  --green-light: #e8f5e0;
+  --green-50: #f0fae8;
+  --white: #ffffff;
+  --gray-50: #f8faf6;
+  --gray-100: #f1f4ee;
+  --gray-200: #e2e6de;
+  --gray-400: #9ca38e;
+  --gray-600: #5a6150;
+  --gray-800: #2d3228;
+  --text-primary: #1a2210;
+  --text-secondary: #4a5240;
+  --shadow-sm: 0 1px 3px rgba(43,90,20,0.08);
+  --shadow-md: 0 4px 20px rgba(43,90,20,0.1);
+  --shadow-lg: 0 12px 40px rgba(43,90,20,0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+}
+.container { max-width:1140px; margin:0 auto; padding:0 24px; }
+.nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(255,255,255,0.92); backdrop-filter:blur(20px); border-bottom:1px solid rgba(43,90,20,0.06); transition:box-shadow .3s; }
+.nav.scrolled { box-shadow:var(--shadow-sm); }
+.nav-inner { display:flex; align-items:center; justify-content:space-between; height:70px; max-width:1140px; margin:0 auto; padding:0 24px; }
+.nav-logo { font-size:1.25rem; font-weight:700; color:var(--green-dark); display:flex; align-items:center; gap:8px; }
+.nav-logo span { color:var(--green-primary); }
+.nav-links { display:flex; gap:32px; align-items:center; }
+.nav-links a { font-size:0.875rem; font-weight:500; color:var(--text-secondary); transition:color .2s; }
+.nav-links a:hover { color:var(--green-primary); }
+.nav-cta { background:var(--green-primary); color:#fff !important; padding:10px 22px; border-radius:8px; font-weight:600; transition:background .2s, transform .2s; }
+.nav-cta:hover { background:var(--green-dark); transform:translateY(-1px); }
+.nav-mobile-btn { display:none; background:none; border:none; cursor:pointer; padding:8px; }
+.nav-mobile-btn span { display:block; width:22px; height:2px; background:var(--gray-800); margin:5px 0; border-radius:2px; transition:.3s; }
+.hero { padding:140px 0 100px; background:linear-gradient(165deg, var(--green-50) 0%, #fff 50%, var(--green-50) 100%); position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; top:-200px; right:-200px; width:600px; height:600px; background:radial-gradient(circle, rgba(90,173,45,0.06) 0%, transparent 70%); border-radius:50%; }
+.hero::after { content:''; position:absolute; bottom:-150px; left:-150px; width:400px; height:400px; background:radial-gradient(circle, rgba(43,90,20,0.04) 0%, transparent 70%); border-radius:50%; }
+.hero-inner { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; position:relative; z-index:1; }
+.hero-badge { display:inline-flex; align-items:center; gap:8px; background:var(--green-light); color:var(--green-dark); padding:6px 16px; border-radius:50px; font-size:0.8rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:24px; }
+.hero-badge::before { content:''; width:8px; height:8px; background:var(--green-primary); border-radius:50%; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+.hero h1 { font-size:3.2rem; line-height:1.12; font-weight:800; color:var(--text-primary); margin-bottom:20px; letter-spacing:-0.03em; }
+.hero h1 .accent { color:var(--green-primary); }
+.hero p.lead { font-size:1.15rem; color:var(--text-secondary); line-height:1.7; margin-bottom:36px; max-width:520px; }
+.hero-btns { display:flex; gap:16px; flex-wrap:wrap; }
+.btn-primary { background:linear-gradient(135deg, var(--green-primary), var(--green-dark)); color:#fff; padding:14px 32px; border-radius:10px; font-weight:600; font-size:1rem; border:none; cursor:pointer; transition:transform .2s, box-shadow .2s; display:inline-flex; align-items:center; gap:8px; }
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(90,173,45,0.3); }
+.btn-secondary { background:var(--white); color:var(--green-dark); padding:14px 32px; border-radius:10px; font-weight:600; font-size:1rem; border:2px solid var(--gray-200); cursor:pointer; transition:border-color .2s, transform .2s; display:inline-flex; align-items:center; gap:8px; }
+.btn-secondary:hover { border-color:var(--green-primary); transform:translateY(-2px); }
+.hero-visual { position:relative; }
+.hero-card { background:var(--white); border-radius:var(--radius-lg); padding:32px; box-shadow:var(--shadow-lg); border:1px solid rgba(43,90,20,0.06); }
+.hero-card-header { display:flex; align-items:center; gap:12px; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--gray-100); }
+.hero-card-dot { width:10px; height:10px; border-radius:50%; }
+.hero-card-dot.r { background:#ef4444; } .hero-card-dot.y { background:#f59e0b; } .hero-card-dot.g { background:#22c55e; }
+.hero-card-title { font-size:0.8rem; color:var(--gray-400); margin-left:8px; }
+.hero-metric { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+.metric-box { background:var(--green-50); border-radius:var(--radius); padding:18px; text-align:center; }
+.metric-box .num { font-size:2rem; font-weight:800; color:var(--green-dark); }
+.metric-box .label { font-size:0.75rem; color:var(--text-secondary); margin-top:4px; }
+.hero-agent-list { display:flex; flex-direction:column; gap:10px; }
+.agent-row { display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--gray-50); border-radius:8px; font-size:0.85rem; }
+.agent-status { width:8px; height:8px; border-radius:50%; background:var(--green-primary); flex-shrink:0; }
+.agent-status.active { animation:pulse 2s infinite; }
+.agent-name { font-weight:600; color:var(--green-dark); min-width:80px; }
+.agent-desc { color:var(--text-secondary); }
+.stats-bar { background:var(--green-dark); padding:48px 0; }
+.stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:32px; text-align:center; }
+.stat-item .stat-num { font-size:2.5rem; font-weight:800; color:var(--green-primary); }
+.stat-item .stat-label { font-size:0.85rem; color:rgba(255,255,255,0.7); margin-top:4px; }
+.standards { padding:64px 0; background:var(--gray-50); border-top:1px solid var(--gray-100); border-bottom:1px solid var(--gray-100); }
+.standards-label { text-align:center; font-size:0.8rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-400); margin-bottom:28px; }
+.standards-grid { display:flex; justify-content:center; flex-wrap:wrap; gap:32px 48px; align-items:center; }
+.std-item { text-align:center; opacity:0.6; transition:opacity .2s; }
+.std-item:hover { opacity:1; }
+.std-item .std-name { font-size:0.95rem; font-weight:700; color:var(--green-dark); }
+.std-item .std-desc { font-size:0.7rem; color:var(--gray-400); margin-top:2px; max-width:140px; }
+.section { padding:100px 0; }
+.section-tag { display:inline-flex; align-items:center; gap:6px; background:var(--green-light); color:var(--green-dark); padding:5px 14px; border-radius:50px; font-size:0.75rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:16px; }
+.section-title { font-size:2.5rem; font-weight:800; color:var(--text-primary); letter-spacing:-0.02em; line-height:1.2; margin-bottom:16px; }
+.section-subtitle { font-size:1.05rem; color:var(--text-secondary); max-width:600px; line-height:1.7; }
+.section-header { margin-bottom:56px; }
+.section-header.centered { text-align:center; }
+.section-header.centered .section-subtitle { margin:0 auto; }
+.problem { background:linear-gradient(180deg, #fff 0%, var(--green-50) 100%); }
+.problem-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+.problem-card { background:var(--white); border-radius:var(--radius); padding:32px; border:1px solid var(--gray-200); transition:transform .3s, box-shadow .3s; }
+.problem-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
+.problem-card .pc-num { font-size:2.2rem; font-weight:800; color:var(--green-primary); margin-bottom:8px; }
+.problem-card .pc-title { font-size:0.95rem; font-weight:700; color:var(--text-primary); margin-bottom:8px; }
+.problem-card .pc-desc { font-size:0.9rem; color:var(--text-secondary); line-height:1.6; }
+.agents { background:var(--white); }
+.phases { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-bottom:48px; }
+.phase-card { background:var(--green-50); border-radius:var(--radius-lg); padding:28px; border:2px solid transparent; transition:border-color .3s, box-shadow .3s; cursor:default; }
+.phase-card:hover { border-color:var(--green-primary); box-shadow:var(--shadow-md); }
+.phase-num { font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--green-primary); margin-bottom:10px; }
+.phase-title { font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-bottom:6px; }
+.phase-agents { font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px; }
+.agent-tag { display:inline-flex; align-items:center; gap:6px; padding:7px 14px; background:var(--white); border-radius:8px; font-size:0.8rem; font-weight:600; color:var(--green-dark); margin:4px 4px 4px 0; border:1px solid var(--gray-200); transition:background .2s, border-color .2s; }
+.agent-tag:hover { background:var(--green-light); border-color:var(--green-primary); }
+.agent-tag .at-dot { width:6px; height:6px; border-radius:50%; background:var(--green-primary); }
+.agents-detail { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.agent-detail-card { background:var(--gray-50); border-radius:var(--radius); padding:24px; border:1px solid var(--gray-100); transition:transform .3s, box-shadow .3s; }
+.agent-detail-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
+.agent-detail-card .ad-icon { width:44px; height:44px; border-radius:10px; background:linear-gradient(135deg, var(--green-primary), var(--green-dark)); display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.1rem; font-weight:700; margin-bottom:14px; }
+.agent-detail-card .ad-name { font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px; }
+.agent-detail-card .ad-desc { font-size:0.85rem; color:var(--text-secondary); line-height:1.6; }
+.plans { background:linear-gradient(180deg, var(--green-50) 0%, #fff 100%); }
+.plans-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.plan-card { background:var(--white); border-radius:var(--radius-lg); padding:36px; border:2px solid var(--gray-200); transition:transform .3s, box-shadow .3s, border-color .3s; position:relative; overflow:hidden; }
+.plan-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+.plan-card.featured { border-color:var(--green-primary); }
+.plan-card.featured::before { content:'Recomendado'; position:absolute; top:16px; right:-28px; background:var(--green-primary); color:#fff; font-size:0.7rem; font-weight:700; padding:4px 36px; transform:rotate(45deg); letter-spacing:0.04em; }
+.plan-name { font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--green-primary); margin-bottom:8px; }
+.plan-title { font-size:1.5rem; font-weight:800; color:var(--text-primary); margin-bottom:8px; }
+.plan-desc { font-size:0.9rem; color:var(--text-secondary); line-height:1.6; margin-bottom:24px; }
+.plan-badge { display:inline-block; background:var(--green-light); color:var(--green-dark); padding:4px 12px; border-radius:6px; font-size:0.8rem; font-weight:600; margin-bottom:20px; }
+.plan-features { list-style:none; margin-bottom:28px; }
+.plan-features li { padding:8px 0; font-size:0.88rem; color:var(--text-secondary); display:flex; align-items:flex-start; gap:10px; border-bottom:1px solid var(--gray-100); }
+.plan-features li:last-child { border:none; }
+.plan-features li::before { content:'✓'; color:var(--green-primary); font-weight:700; flex-shrink:0; margin-top:1px; }
+.plan-btn { display:block; width:100%; text-align:center; padding:14px; border-radius:10px; font-weight:600; font-size:0.95rem; border:2px solid var(--green-primary); color:var(--green-dark); background:transparent; cursor:pointer; transition:background .2s, color .2s; }
+.plan-btn:hover { background:var(--green-primary); color:#fff; }
+.plan-card.featured .plan-btn { background:var(--green-primary); color:#fff; border-color:var(--green-primary); }
+.plan-card.featured .plan-btn:hover { background:var(--green-dark); border-color:var(--green-dark); }
+.contact { background:var(--green-dark); color:#fff; position:relative; overflow:hidden; }
+.contact::before { content:''; position:absolute; top:-100px; right:-100px; width:400px; height:400px; background:radial-gradient(circle, rgba(90,173,45,0.15), transparent 70%); border-radius:50%; }
+.contact-inner { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; position:relative; z-index:1; }
+.contact .section-title { color:#fff; }
+.contact .section-subtitle { color:rgba(255,255,255,0.7); }
+.contact-form { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius-lg); padding:36px; backdrop-filter:blur(10px); }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.form-group { margin-bottom:16px; }
+.form-group label { display:block; font-size:0.8rem; font-weight:600; color:rgba(255,255,255,0.8); margin-bottom:6px; }
+.form-group input, .form-group select, .form-group textarea { width:100%; padding:12px 16px; border-radius:8px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.08); color:#fff; font-size:0.9rem; font-family:inherit; transition:border-color .2s; }
+.form-group input::placeholder, .form-group textarea::placeholder { color:rgba(255,255,255,0.4); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline:none; border-color:var(--green-primary); }
+.form-group select { appearance:none; cursor:pointer; }
+.form-group select option { background:var(--green-darker); color:#fff; }
+.form-group textarea { resize:vertical; min-height:80px; }
+.form-submit { width:100%; padding:14px; border-radius:10px; background:linear-gradient(135deg, var(--green-primary), #4a9624); color:#fff; font-weight:700; font-size:1rem; border:none; cursor:pointer; transition:transform .2s, box-shadow .2s; }
+.form-submit:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(90,173,45,0.3); }
+.form-note { text-align:center; font-size:0.78rem; color:rgba(255,255,255,0.4); margin-top:12px; }
+.form-success { display:none; text-align:center; padding:20px; background:rgba(90,173,45,0.15); border-radius:10px; margin-top:16px; color:var(--green-primary); font-weight:600; }
+.footer { background:var(--green-darker); color:rgba(255,255,255,0.5); padding:40px 0; }
+.footer-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+.footer-logo { font-size:1.1rem; font-weight:700; color:rgba(255,255,255,0.8); }
+.footer-logo span { color:var(--green-primary); }
+.footer-links { display:flex; gap:24px; }
+.footer-links a { font-size:0.85rem; transition:color .2s; }
+.footer-links a:hover { color:var(--green-primary); }
+.footer-copy { font-size:0.8rem; width:100%; text-align:center; margin-top:24px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.08); }
+.fade-up { opacity:0; transform:translateY(30px); transition:opacity .7s ease, transform .7s ease; }
+.fade-up.visible { opacity:1; transform:translateY(0); }
+@media (max-width:1024px) {
+  .hero h1 { font-size:2.5rem; }
+  .hero-inner { grid-template-columns:1fr; gap:40px; }
+  .hero-visual { order:-1; }
+  .stats-grid { grid-template-columns:repeat(2,1fr); }
+  .phases { grid-template-columns:1fr; }
+  .agents-detail { grid-template-columns:repeat(2,1fr); }
+  .plans-grid { grid-template-columns:1fr; max-width:480px; margin:0 auto; }
+  .contact-inner { grid-template-columns:1fr; }
+}
+@media (max-width:768px) {
+  .nav-links { display:none; }
+  .nav-mobile-btn { display:block; }
+  .nav-links.open { display:flex; flex-direction:column; position:absolute; top:70px; left:0; right:0; background:#fff; padding:24px; border-bottom:1px solid var(--gray-200); box-shadow:var(--shadow-md); }
+  .hero { padding:110px 0 60px; }
+  .hero h1 { font-size:2rem; }
+  .section { padding:64px 0; }
+  .section-title { font-size:1.8rem; }
+  .problem-grid { grid-template-columns:1fr; }
+  .agents-detail { grid-template-columns:1fr; }
+  .form-row { grid-template-columns:1fr; }
+  .stats-grid { grid-template-columns:repeat(2,1fr); gap:20px; }
+  .footer-inner { flex-direction:column; text-align:center; }
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Regulator<span>.IA</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#problema">El problema</a>
+      <a href="#agentes">Agentes IA</a>
+      <a href="#planes">Planes</a>
+      <a href="#contacto" class="nav-cta">Lista de espera</a>
+    </div>
+    <button class="nav-mobile-btn" id="navToggle" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">Lanzamiento próximo · LATAM</div>
+        <h1>El registro de plaguicidas, <span class="accent">automatizado con IA.</span></h1>
+        <p class="lead">Regulator.IA es la plataforma de agentes IA para equipos regulatorios en agroquímica. Automatiza expedientes SAG, análisis QSAR, gestión documental y seguimiento de registros — en Chile y toda LATAM.</p>
+        <div class="hero-btns">
+          <a href="#contacto" class="btn-primary">Quiero acceso anticipado →</a>
+          <a href="#agentes" class="btn-secondary">Ver los 11 agentes</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <div class="hero-card-dot r"></div><div class="hero-card-dot y"></div><div class="hero-card-dot g"></div>
+            <span class="hero-card-title">regulator.ia / dashboard</span>
+          </div>
+          <div class="hero-metric">
+            <div class="metric-box"><div class="num">80%</div><div class="label">Menos tiempo por registro</div></div>
+            <div class="metric-box"><div class="num">90%</div><div class="label">Reducción costos análisis</div></div>
+            <div class="metric-box"><div class="num">11</div><div class="label">Agentes IA especializados</div></div>
+            <div class="metric-box"><div class="num">5 min</div><div class="label">Análisis completo</div></div>
+          </div>
+          <div class="hero-agent-list">
+            <div class="agent-row"><div class="agent-status active"></div><span class="agent-name">PREDICT</span><span class="agent-desc">Análisis regulatorio activo...</span></div>
+            <div class="agent-row"><div class="agent-status active"></div><span class="agent-name">QSAR</span><span class="agent-desc">Evaluación toxicológica...</span></div>
+            <div class="agent-row"><div class="agent-status"></div><span class="agent-name">SENTINEL</span><span class="agent-desc">Monitoreando normativas...</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item fade-up"><div class="stat-num">80%</div><div class="stat-label">Menos tiempo por registro</div></div>
+      <div class="stat-item fade-up"><div class="stat-num">90%</div><div class="stat-label">Reducción de costos de análisis</div></div>
+      <div class="stat-item fade-up"><div class="stat-num">11</div><div class="stat-label">Agentes IA especializados</div></div>
+      <div class="stat-item fade-up"><div class="stat-num">5 min</div><div class="stat-label">Análisis completo vs. 2 semanas</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="standards">
+  <div class="container">
+    <div class="standards-label">Alineados con estándares internacionales</div>
+    <div class="standards-grid">
+      <div class="std-item"><div class="std-name">SAG Chile</div><div class="std-desc">Servicio Agrícola y Ganadero</div></div>
+      <div class="std-item"><div class="std-name">OECD</div><div class="std-desc">Guías de Ensayo y Buenas Prácticas</div></div>
+      <div class="std-item"><div class="std-name">QSAR OECD</div><div class="std-desc">Principios de Validación QSAR</div></div>
+      <div class="std-item"><div class="std-name">EPA OPPTS</div><div class="std-desc">Series 830, 850, 870, 880</div></div>
+      <div class="std-item"><div class="std-name">EPA</div><div class="std-desc">Environmental Protection Agency</div></div>
+      <div class="std-item"><div class="std-name">GHS / CLP</div><div class="std-desc">Clasificación y Etiquetado Global</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section problem" id="problema">
+  <div class="container">
+    <div class="section-header centered fade-up">
+      <div class="section-tag">Diagnóstico</div>
+      <h2 class="section-title">Los equipos regulatorios trabajan en modo manual.</h2>
+      <p class="section-subtitle">En agroquímica, el proceso de registro es complejo, costoso y repetitivo. Regulator.IA automatiza exactamente las partes que consumen más tiempo.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card fade-up"><div class="pc-num">40–80 hrs</div><div class="pc-title">Análisis manual de expedientes por semana</div><div class="pc-desc">Un director regulatorio dedica la mayor parte de su jornada a revisar documentos que la IA puede procesar en minutos.</div></div>
+      <div class="problem-card fade-up"><div class="pc-num">$15K+ USD</div><div class="pc-title">Costo de consultoría externa por análisis</div><div class="pc-desc">Cada análisis QSAR o expediente delegado a una consultora externa representa un gasto recurrente y sin trazabilidad interna.</div></div>
+      <div class="problem-card fade-up"><div class="pc-num">2–4 sem</div><div class="pc-title">Tiempo promedio de tramitación</div><div class="pc-desc">La formulación y revisión de un expediente completo de registro de plaguicidas puede tomar hasta un mes con procesos manuales.</div></div>
+      <div class="problem-card fade-up"><div class="pc-num">0%</div><div class="pc-title">Trazabilidad en procesos manuales</div><div class="pc-desc">Sin registro automatizado de decisiones y criterios, cada inspección regulatoria es un riesgo. Regulator.IA documenta todo automáticamente.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section agents" id="agentes">
+  <div class="container">
+    <div class="section-header centered fade-up">
+      <div class="section-tag">Ecosistema</div>
+      <h2 class="section-title">11 agentes IA especializados</h2>
+      <p class="section-subtitle">Diseñados para cada etapa del proceso regulatorio. Cada agente domina una disciplina específica.</p>
+    </div>
+    <div class="phases fade-up">
+      <div class="phase-card">
+        <div class="phase-num">Fase 01 · Pre Registro</div>
+        <div class="phase-title">Preparación</div>
+        <div class="phase-agents">3 agentes · Evaluación previa al registro</div>
+        <div><span class="agent-tag"><span class="at-dot"></span>QSAR</span><span class="agent-tag"><span class="at-dot"></span>COMPASS</span><span class="agent-tag"><span class="at-dot"></span>INSIGHT</span></div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">Fase 02 · Registro</div>
+        <div class="phase-title">Proceso activo</div>
+        <div class="phase-agents">5 agentes · Formulación y tramitación</div>
+        <div><span class="agent-tag"><span class="at-dot"></span>PREDICT</span><span class="agent-tag"><span class="at-dot"></span>BINDER</span><span class="agent-tag"><span class="at-dot"></span>SCRIBE</span><span class="agent-tag"><span class="at-dot"></span>REVIEW</span><span class="agent-tag"><span class="at-dot"></span>AUDITOR</span></div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">Fase 03 · Post Registro</div>
+        <div class="phase-title">Mantenimiento</div>
+        <div class="phase-agents">3 agentes · Seguimiento y expansión</div>
+        <div><span class="agent-tag"><span class="at-dot"></span>SENTINEL</span><span class="agent-tag"><span class="at-dot"></span>ATLAS</span><span class="agent-tag"><span class="at-dot"></span>CONDUCTOR</span></div>
+      </div>
+    </div>
+    <div class="agents-detail fade-up">
+      <div class="agent-detail-card"><div class="ad-icon">P</div><div class="ad-name">PREDICT</div><div class="ad-desc">Análisis regulatorio completo de expedientes. De 2 semanas a 5 minutos.</div></div>
+      <div class="agent-detail-card"><div class="ad-icon">Q</div><div class="ad-name">QSAR</div><div class="ad-desc">Evaluación toxicológica y química automatizada conforme a marcos regulatorios SAG e internacionales.</div></div>
+      <div class="agent-detail-card"><div class="ad-icon">C</div><div class="ad-name">COMPASS</div><div class="ad-desc">Mapea la ruta regulatoria óptima para cada producto en cada jurisdicción de LATAM.</div></div>
+      <div class="agent-detail-card"><div class="ad-icon">B</div><div class="ad-name">BINDER</div><div class="ad-desc">Consolida y organiza toda la documentación regulatoria en expedientes estructurados.</div></div>
+      <div class="agent-detail-card"><div class="ad-icon">S</div><div class="ad-name">SENTINEL</div><div class="ad-desc">Monitorea cambios normativos en tiempo real y alerta sobre regulaciones que afectan tus registros activos.</div></div>
+      <div class="agent-detail-card"><div class="ad-icon">A</div><div class="ad-name">ATLAS</div><div class="ad-desc">Gestión multi-país para LATAM: sincroniza registros y requisitos entre Chile, Argentina, México y Brasil.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section plans" id="planes">
+  <div class="container">
+    <div class="section-header centered fade-up">
+      <div class="section-tag">Planes</div>
+      <h2 class="section-title">Un plan para cada equipo regulatorio</h2>
+      <p class="section-subtitle">Precios disponibles al lanzamiento. Regístrate hoy para acceso anticipado con condiciones especiales.</p>
+    </div>
+    <div class="plans-grid fade-up">
+      <div class="plan-card">
+        <div class="plan-name">Essential</div>
+        <div class="plan-title">Para consultoras</div>
+        <div class="plan-desc">Consultoras regulatorias independientes que quieren escalar capacidad sin aumentar equipo.</div>
+        <div class="plan-badge">Prontamente</div>
+        <ul class="plan-features">
+          <li>PREDICT — análisis de expedientes</li>
+          <li>QSAR — evaluación toxicológica</li>
+          <li>REVIEW — revisión documental</li>
+          <li>SCRIBE — generación de informes</li>
+          <li>Trazabilidad y auditoría completa</li>
+        </ul>
+        <a href="#contacto" class="plan-btn">Inscribirme en lista de espera</a>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-name">Innovator</div>
+        <div class="plan-title">Para empresas</div>
+        <div class="plan-desc">Empresas agroquímicas con equipo regulatorio que necesitan automatizar el ciclo completo de registro.</div>
+        <div class="plan-badge">Prontamente</div>
+        <ul class="plan-features">
+          <li>Todo lo de Essential</li>
+          <li>COMPASS — rutas multi-jurisdicción</li>
+          <li>BINDER — gestión documental</li>
+          <li>AUDITOR — cumplimiento continuo</li>
+          <li>SENTINEL — monitoreo normativo</li>
+          <li>Soporte regulatorio dedicado</li>
+        </ul>
+        <a href="#contacto" class="plan-btn">Inscribirme en lista de espera</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-title">Para corporaciones</div>
+        <div class="plan-desc">Grandes corporaciones y asociaciones que requieren los 11 agentes y máxima integración LATAM.</div>
+        <div class="plan-badge">Prontamente</div>
+        <ul class="plan-features">
+          <li>Los 11 agentes completos</li>
+          <li>ATLAS — gestión multi-país LATAM</li>
+          <li>CONDUCTOR — automatización de flujos</li>
+          <li>INSIGHT — análisis estratégico</li>
+          <li>API + integraciones custom</li>
+          <li>Onboarding y capacitación</li>
+          <li>SLA enterprise garantizado</li>
+        </ul>
+        <a href="#contacto" class="plan-btn">Inscribirme en lista de espera</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contacto">
+  <div class="container">
+    <div class="contact-inner">
+      <div>
+        <div class="section-tag" style="background:rgba(90,173,45,0.15); color:var(--green-primary);">Lista de espera</div>
+        <h2 class="section-title">Acceso anticipado.<br>Condiciones especiales.</h2>
+        <p class="section-subtitle">Regístrate hoy y sé de los primeros en acceder a Regulator.IA con precio de lanzamiento y onboarding personalizado.</p>
+      </div>
+      <div>
+        <form class="contact-form" id="waitlistForm">
+          <div class="form-row">
+            <div class="form-group"><label for="fname">Nombre *</label><input type="text" id="fname" name="nombre" placeholder="Tu nombre" required></div>
+            <div class="form-group"><label for="lname">Apellido</label><input type="text" id="lname" name="apellido" placeholder="Tu apellido"></div>
+          </div>
+          <div class="form-group"><label for="email">Correo corporativo *</label><input type="email" id="email" name="email" placeholder="tu@empresa.com" required></div>
+          <div class="form-row">
+            <div class="form-group"><label for="company">Empresa</label><input type="text" id="company" name="empresa" placeholder="Nombre de tu empresa"></div>
+            <div class="form-group"><label for="role">Cargo</label><input type="text" id="role" name="cargo" placeholder="Tu cargo"></div>
+          </div>
+          <div class="form-group">
+            <label for="orgtype">Tipo de organización</label>
+            <select id="orgtype" name="tipo_organizacion">
+              <option value="">Selecciona una opción...</option>
+              <option value="empresa_agroquimica">Empresa agroquímica</option>
+              <option value="consultora">Consultora regulatoria</option>
+              <option value="asociacion">Asociación / Federación (AFIPA, etc.)</option>
+              <option value="organismo">Organismo regulador (SAG, ISP, etc.)</option>
+              <option value="distribuidora">Distribuidora / Importadora</option>
+              <option value="otra">Otra</option>
+            </select>
+          </div>
+          <button type="submit" class="form-submit" id="submitBtn">Quiero acceso anticipado →</button>
+          <p class="form-note">Sin spam. Te contactamos personalmente antes del lanzamiento.</p>
+          <div class="form-success" id="formSuccess">¡Quedaste en la lista! Te escribiremos a tu correo antes del lanzamiento con acceso anticipado y condiciones especiales.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">Regulator<span>.IA</span></div>
+      <div class="footer-links">
+        <a href="#problema">El problema</a>
+        <a href="#agentes">Agentes</a>
+        <a href="#planes">Planes</a>
+        <a href="mailto:proyectos@uranoia.cl">proyectos@uranoia.cl</a>
+      </div>
+      <div class="footer-copy">© 2026 Urano.IA SpA · proyectos@uranoia.cl · +56 9 8144 0854</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
+document.getElementById('navToggle').addEventListener('click', () => { document.getElementById('navLinks').classList.toggle('open'); });
+document.querySelectorAll('.nav-links a').forEach(a => { a.addEventListener('click', () => { document.getElementById('navLinks').classList.remove('open'); }); });
+const fadeObserver = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const nombre = document.getElementById('fname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const apellido = document.getElementById('lname').value.trim();
+  const empresa = document.getElementById('company').value.trim();
+  const cargo = document.getElementById('role').value.trim();
+  const tipo = document.getElementById('orgtype').value;
+  if (!nombre || !email) return;
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+  const subject = encodeURIComponent('[Regulator.IA] Lista de espera - ' + nombre + ' ' + apellido);
+  const body = encodeURIComponent('Nombre: ' + nombre + ' ' + apellido + '\nEmail: ' + email + '\nEmpresa: ' + empresa + '\nCargo: ' + cargo + '\nTipo: ' + tipo);
+  window.location.href = 'mailto:proyectos@uranoia.cl?subject=' + subject + '&body=' + body;
+  setTimeout(() => {
+    document.getElementById('formSuccess').style.display = 'block';
+    btn.textContent = '\u2713 \u00a1Registrado!';
+    btn.style.background = 'linear-gradient(135deg,#065F46,#059669)';
+  }, 500);
+});
+<\/script>
+
+</body>
+</html>
