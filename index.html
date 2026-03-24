@@ -52,6 +52,22 @@ a{text-decoration:none;color:inherit}
 .btn-ghost{color:var(--green-dark);padding:16px 36px;border-radius:12px;font-weight:600;font-size:1rem;border:2px solid var(--border);cursor:pointer;transition:border-color .3s,box-shadow .3s;background:transparent}
 .btn-ghost:hover{border-color:var(--green);box-shadow:0 4px 15px rgba(90,173,45,0.1)}
 
+/* HERO CAROUSEL */
+.hero-carousel{margin-top:48px;position:relative;width:100%;max-width:850px;margin-left:auto;margin-right:auto;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(43,90,20,0.12);border:1px solid var(--border)}
+.carousel-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1);will-change:transform}
+.carousel-slide{min-width:100%;position:relative}
+.carousel-slide img{width:100%;height:380px;object-fit:cover;display:block}
+.carousel-slide .slide-caption{position:absolute;bottom:0;left:0;right:0;padding:24px 32px;background:linear-gradient(transparent,rgba(15,26,10,.75));color:#fff}
+.carousel-slide .slide-caption h3{font-size:1.05rem;font-weight:700;margin-bottom:4px}
+.carousel-slide .slide-caption p{font-size:.82rem;opacity:.85;line-height:1.5}
+.carousel-nav{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:20px}
+.carousel-dot{width:10px;height:10px;border-radius:50%;background:var(--border);border:none;cursor:pointer;transition:background .3s,transform .3s;padding:0}
+.carousel-dot.active{background:var(--green);transform:scale(1.3)}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border:none;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.4rem;font-weight:300;color:var(--green-dark);box-shadow:0 2px 12px rgba(0,0,0,.1);transition:background .3s,transform .3s;z-index:5}
+.carousel-btn:hover{background:#fff;transform:translateY(-50%) scale(1.08)}
+.carousel-btn.prev{left:14px}
+.carousel-btn.next{right:14px}
+
 /* PARTICLES CANVAS */
 #particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
 
@@ -182,6 +198,7 @@ a{text-decoration:none;color:inherit}
   .orq-ring.r3{width:480px;height:480px}
   .phases-grid{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .carousel-slide img{height:320px}
 }
 @media(max-width:768px){
   .nav-links{display:none}
@@ -201,6 +218,11 @@ a{text-decoration:none;color:inherit}
   .cta-box{padding:48px 24px}
   .cta-box h2{font-size:1.8rem}
   .footer-inner{flex-direction:column;text-align:center}
+  .carousel-slide img{height:240px}
+  .carousel-slide .slide-caption{padding:16px 20px}
+  .carousel-slide .slide-caption h3{font-size:.9rem}
+  .carousel-slide .slide-caption p{font-size:.75rem}
+  .carousel-btn{width:34px;height:34px;font-size:1.1rem}
 }
 </style>
 </head>
@@ -230,6 +252,51 @@ a{text-decoration:none;color:inherit}
         <a href="#contacto" class="btn-glow">Agenda una consulta &rarr;</a>
         <a href="#agentes" class="btn-ghost">Conoce los agentes</a>
       </div>
+
+      <!-- CAROUSEL -->
+      <div class="hero-carousel">
+        <button class="carousel-btn prev" onclick="moveSlide(-1)" aria-label="Anterior">&#8249;</button>
+        <button class="carousel-btn next" onclick="moveSlide(1)" aria-label="Siguiente">&#8250;</button>
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=900&h=450&fit=crop&q=80" alt="Campos agr&iacute;colas - registro de plaguicidas" loading="eager">
+            <div class="slide-caption">
+              <h3>Registro de Plaguicidas en Chile y LATAM</h3>
+              <p>Automatizamos el proceso completo: desde la clasificaci&oacute;n regulatoria hasta la aprobaci&oacute;n final por SAG.</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=900&h=450&fit=crop&q=80" alt="Laboratorio de an&aacute;lisis toxicol&oacute;gico" loading="lazy">
+            <div class="slide-caption">
+              <h3>An&aacute;lisis Toxicol&oacute;gico con IA</h3>
+              <p>Evaluaci&oacute;n de riesgo y perfiles toxicol&oacute;gicos conforme a marcos OECD, EPA y normativa local.</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&h=450&fit=crop&q=80" alt="Tecnolog&iacute;a e inteligencia artificial" loading="lazy">
+            <div class="slide-caption">
+              <h3>11 Agentes de IA Especializados</h3>
+              <p>Tecnolog&iacute;a de vanguardia aplicada a la regulaci&oacute;n agroqu&iacute;mica. 3 agentes gratuitos de pre-registro.</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&h=450&fit=crop&q=80" alt="Documentaci&oacute;n y dossier t&eacute;cnico" loading="lazy">
+            <div class="slide-caption">
+              <h3>Dossier T&eacute;cnico Automatizado</h3>
+              <p>Compilaci&oacute;n y estructuraci&oacute;n de expedientes seg&uacute;n formatos exigidos por SAG y autoridades LATAM.</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=900&h=450&fit=crop&q=80" alt="Seguridad y compliance regulatorio" loading="lazy">
+            <div class="slide-caption">
+              <h3>Seguridad y Compliance Garantizados</h3>
+              <p>Monitoreo regulatorio 24/7 y auditor&iacute;a autom&aacute;tica de documentaci&oacute;n y vigencias.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-nav" id="carouselDots"></div>
+
     </div>
   </div>
 </section>
@@ -406,6 +473,37 @@ a{text-decoration:none;color:inherit}
 <div class="agent-tooltip" id="tooltip"></div>
 
 <script>
+/* CAROUSEL */
+let currentSlide=0,autoplayTimer;
+const track=document.getElementById('carouselTrack');
+const totalSlides=track.children.length;
+const dotsContainer=document.getElementById('carouselDots');
+for(let i=0;i<totalSlides;i++){
+  const d=document.createElement('button');
+  d.className='carousel-dot'+(i===0?' active':'');
+  d.setAttribute('aria-label','Slide '+(i+1));
+  d.onclick=function(){goSlide(i)};
+  dotsContainer.appendChild(d);
+}
+function goSlide(n){
+  currentSlide=((n%totalSlides)+totalSlides)%totalSlides;
+  track.style.transform='translateX(-'+currentSlide*100+'%)';
+  var dots=document.querySelectorAll('.carousel-dot');
+  for(var i=0;i<dots.length;i++){dots[i].className=i===currentSlide?'carousel-dot active':'carousel-dot'}
+  resetAutoplay();
+}
+function moveSlide(dir){goSlide(currentSlide+dir)}
+function resetAutoplay(){clearInterval(autoplayTimer);autoplayTimer=setInterval(function(){moveSlide(1)},5000)}
+resetAutoplay();
+/* pause on hover */
+document.querySelector('.hero-carousel').addEventListener('mouseenter',function(){clearInterval(autoplayTimer)});
+document.querySelector('.hero-carousel').addEventListener('mouseleave',function(){resetAutoplay()});
+/* swipe support */
+var touchStartX=0,touchEndX=0;
+track.addEventListener('touchstart',function(e){touchStartX=e.changedTouches[0].screenX},{passive:true});
+track.addEventListener('touchend',function(e){touchEndX=e.changedTouches[0].screenX;if(touchStartX-touchEndX>50)moveSlide(1);if(touchEndX-touchStartX>50)moveSlide(-1)},{passive:true});
+
+/* AGENT TOOLTIPS */
 const agents={
   vigilancia:{name:"Agente de Vigilancia Regulatoria",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Monitorea cambios normativos en SAG, ISP, Diario Oficial y SEREMI en tiempo real. Alerta autom\u00e1tica sobre regulaciones que afectan tus registros activos.",free:true},
   clasificacion:{name:"Agente de Clasificaci\u00f3n Regulatoria",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Determina la categor\u00eda regulatoria del producto (fitosanitario, fertilizante, coadyuvante) y la entidad reguladora correspondiente.",free:true},
@@ -420,32 +518,33 @@ const agents={
   comunicacion:{name:"Agente de Comunicaci\u00f3n Regulatoria",phase:"Post-Registro",phaseClass:"tt-post",desc:"Gestiona comunicaci\u00f3n formal con autoridades regulatorias. Genera oficios, respuestas y seguimiento de tr\u00e1mites."}
 };
 const tooltip=document.getElementById('tooltip');
-document.querySelectorAll('.agent-node').forEach(node=>{
-  node.addEventListener('mouseenter',e=>{
-    const a=agents[node.dataset.agent];if(!a)return;
+document.querySelectorAll('.agent-node').forEach(function(node){
+  node.addEventListener('mouseenter',function(e){
+    var a=agents[node.dataset.agent];if(!a)return;
     tooltip.innerHTML='<span class="tt-phase '+a.phaseClass+'">'+a.phase+(a.free?' \u00b7 GRATIS':'')+'</span><h3>'+a.name+'</h3><p>'+a.desc+'</p>';
     tooltip.classList.add('show');
   });
-  node.addEventListener('mousemove',e=>{
+  node.addEventListener('mousemove',function(e){
     tooltip.style.left=Math.min(e.clientX+16,window.innerWidth-340)+'px';
     tooltip.style.top=(e.clientY+16)+'px';
   });
-  node.addEventListener('mouseleave',()=>tooltip.classList.remove('show'));
+  node.addEventListener('mouseleave',function(){tooltip.classList.remove('show')});
 });
 
-const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
-let W,H,particles=[],mouse={x:0,y:0};
+/* PARTICLES */
+var canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
+var W,H,particles=[],mouse={x:0,y:0};
 function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
 window.addEventListener('resize',resize);resize();
-document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
-for(let i=0;i<40;i++)particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,r:Math.random()*2+.5,o:Math.random()*.15+.05});
+document.addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY});
+for(var i=0;i<40;i++)particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,r:Math.random()*2+.5,o:Math.random()*.15+.05});
 function drawParticles(){
   ctx.clearRect(0,0,W,H);
-  particles.forEach(p=>{
+  particles.forEach(function(p){
     p.x+=p.vx;p.y+=p.vy;
     if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
-    const dx=mouse.x-p.x,dy=mouse.y-p.y,dist=Math.sqrt(dx*dx+dy*dy);
-    const glow=dist<200?(.1*(1-dist/200)):0;
+    var dx=mouse.x-p.x,dy=mouse.y-p.y,dist=Math.sqrt(dx*dx+dy*dy);
+    var glow=dist<200?(.1*(1-dist/200)):0;
     ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
     ctx.fillStyle='rgba(90,173,45,'+(p.o+glow)+')';ctx.fill();
     if(dist<120){
@@ -457,39 +556,43 @@ function drawParticles(){
 }
 drawParticles();
 
-const svg=document.getElementById('connSvg');
-const diagram=document.getElementById('diagram');
+/* CONNECTION LINES */
+var svg=document.getElementById('connSvg');
+var diagram=document.getElementById('diagram');
 function drawConnections(){
-  const dRect=diagram.getBoundingClientRect();
-  const cx=dRect.width/2,cy=dRect.height/2;
-  let svgHTML='';
-  document.querySelectorAll('.agent-node').forEach(node=>{
-    const nRect=node.getBoundingClientRect();
-    const nx=nRect.left-dRect.left+nRect.width/2;
-    const ny=nRect.top-dRect.top+nRect.height/2;
+  var dRect=diagram.getBoundingClientRect();
+  var cx=dRect.width/2,cy=dRect.height/2;
+  var svgHTML='';
+  document.querySelectorAll('.agent-node').forEach(function(node){
+    var nRect=node.getBoundingClientRect();
+    var nx=nRect.left-dRect.left+nRect.width/2;
+    var ny=nRect.top-dRect.top+nRect.height/2;
     svgHTML+='<line class="conn-line" x1="'+cx+'" y1="'+cy+'" x2="'+nx+'" y2="'+ny+'"/>';
-    svgHTML+='<circle class="data-pulse" cx="'+cx+'" cy="'+cy+'" r="3"><animate attributeName="cx" from="'+cx+'" to="'+nx+'" dur="'+(2+Math.random()*3)+'s" repeatCount="indefinite"/><animate attributeName="cy" from="'+cy+'" to="'+ny+'" dur="'+(2+Math.random()*3)+'s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.6;0" dur="'+(2+Math.random()*3)+'s" repeatCount="indefinite"/></circle>';
+    var dur=(2+Math.random()*3).toFixed(1);
+    svgHTML+='<circle class="data-pulse" cx="'+cx+'" cy="'+cy+'" r="3"><animate attributeName="cx" from="'+cx+'" to="'+nx+'" dur="'+dur+'s" repeatCount="indefinite"/><animate attributeName="cy" from="'+cy+'" to="'+ny+'" dur="'+dur+'s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.6;0" dur="'+dur+'s" repeatCount="indefinite"/></circle>';
   });
   svg.innerHTML=svgHTML;
 }
 setTimeout(drawConnections,100);
-window.addEventListener('resize',()=>setTimeout(drawConnections,200));
+window.addEventListener('resize',function(){setTimeout(drawConnections,200)});
 
-const revealObs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
-setTimeout(()=>{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'))},3000);
+/* SCROLL REVEAL */
+var revealObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){revealObs.observe(el)});
+setTimeout(function(){document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible')})},3000);
 
+/* CONTACT FORM */
 document.getElementById('contactForm').addEventListener('submit',function(e){
   e.preventDefault();
-  const btn=document.getElementById('submitBtn');
-  const n=document.getElementById('fname').value.trim();
-  const em=document.getElementById('email').value.trim();
+  var btn=document.getElementById('submitBtn');
+  var n=document.getElementById('fname').value.trim();
+  var em=document.getElementById('email').value.trim();
   if(!n||!em)return;
   btn.textContent='Enviando...';btn.disabled=true;
-  const subj=encodeURIComponent('[RegulatorIA] Consulta - '+n);
-  const body=encodeURIComponent('Nombre: '+n+' '+document.getElementById('lname').value+'\nEmail: '+em+'\nEmpresa: '+document.getElementById('company').value+'\nCargo: '+document.getElementById('role').value+'\nTipo: '+document.getElementById('orgtype').value+'\nMensaje: '+document.getElementById('msg').value);
+  var subj=encodeURIComponent('[RegulatorIA] Consulta - '+n);
+  var body=encodeURIComponent('Nombre: '+n+' '+document.getElementById('lname').value+'\nEmail: '+em+'\nEmpresa: '+document.getElementById('company').value+'\nCargo: '+document.getElementById('role').value+'\nTipo: '+document.getElementById('orgtype').value+'\nMensaje: '+document.getElementById('msg').value);
   window.location.href='mailto:proyectos@uranoia.cl?subject='+subj+'&body='+body;
-  setTimeout(()=>{document.getElementById('formOk').style.display='block';btn.textContent='\u2713 Enviado';btn.style.background='linear-gradient(135deg,#065F46,#059669)'},500);
+  setTimeout(function(){document.getElementById('formOk').style.display='block';btn.textContent='\u2713 Enviado';btn.style.background='linear-gradient(135deg,#065F46,#059669)'},500);
 });
 </script>
 </body>
