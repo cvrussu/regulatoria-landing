@@ -32,41 +32,41 @@ a{text-decoration:none;color:inherit}
 .nav-mobile{display:none;background:none;border:none;cursor:pointer;padding:8px}
 .nav-mobile span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;border-radius:2px}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 0 80px;background:linear-gradient(165deg,#f0fae8 0%,#fff 40%,#f8faf6 100%)}
-.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 50%,rgba(90,173,45,0.06) 0%,transparent 50%),radial-gradient(ellipse at 70% 50%,rgba(43,90,20,0.03) 0%,transparent 50%);animation:heroBg 20s ease infinite alternate}
-@keyframes heroBg{0%{transform:translate(0,0)}100%{transform:translate(-5%,3%)}}
-.hero-content{text-align:center;position:relative;z-index:2;max-width:900px;margin:0 auto}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(90,173,45,0.1);border:1px solid rgba(90,173,45,0.25);color:var(--green-dark);padding:8px 20px;border-radius:50px;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:32px}
+/* HERO WITH BACKGROUND CAROUSEL */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 0 80px}
+
+/* Background carousel slides */
+.hero-bg-carousel{position:absolute;inset:0;z-index:0}
+.hero-bg-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease-in-out}
+.hero-bg-slide.active{opacity:1}
+.hero-bg-slide img{width:100%;height:100%;object-fit:cover}
+/* Dark overlay for text readability */
+.hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(165deg,rgba(15,26,10,0.75) 0%,rgba(43,90,20,0.6) 40%,rgba(15,26,10,0.8) 100%);z-index:1}
+/* Subtle green gradient on top */
+.hero-bg-overlay::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(90,173,45,0.1) 0%,transparent 60%)}
+
+.hero-content{text-align:center;position:relative;z-index:3;max-width:900px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(90,173,45,0.2);border:1px solid rgba(90,173,45,0.4);color:#b8e986;padding:8px 20px;border-radius:50px;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:32px}
 .hero-badge::before{content:'';width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(90,173,45,0.4)}50%{opacity:.7;box-shadow:0 0 0 8px rgba(90,173,45,0)}}
-.hero h1{font-size:4rem;font-weight:900;line-height:1.1;letter-spacing:-.04em;margin-bottom:24px;color:var(--text-heading)}
-.hero h1 .gradient{background:linear-gradient(135deg,var(--green-dark),var(--green),#7BC950);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:gradShift 5s ease infinite}
+.hero h1{font-size:4rem;font-weight:900;line-height:1.1;letter-spacing:-.04em;margin-bottom:24px;color:#fff}
+.hero h1 .gradient{background:linear-gradient(135deg,#7BC950,var(--green),#b8e986);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:gradShift 5s ease infinite}
 @keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.hero .lead{font-size:1.2rem;color:var(--text-dim);max-width:700px;margin:0 auto 40px;line-height:1.8}
-.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.hero .lead{font-size:1.2rem;color:rgba(255,255,255,0.85);max-width:700px;margin:0 auto 40px;line-height:1.8}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
 .btn-glow{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;padding:16px 36px;border-radius:12px;font-weight:700;font-size:1rem;border:none;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
-.btn-glow:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(90,173,45,0.3)}
+.btn-glow:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(90,173,45,0.4)}
 .btn-glow::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,255,255,0.15),transparent);transform:rotate(45deg);transition:.5s}
 .btn-glow:hover::after{left:100%}
-.btn-ghost{color:var(--green-dark);padding:16px 36px;border-radius:12px;font-weight:600;font-size:1rem;border:2px solid var(--border);cursor:pointer;transition:border-color .3s,box-shadow .3s;background:transparent}
-.btn-ghost:hover{border-color:var(--green);box-shadow:0 4px 15px rgba(90,173,45,0.1)}
+.btn-ghost{color:#fff;padding:16px 36px;border-radius:12px;font-weight:600;font-size:1rem;border:2px solid rgba(255,255,255,0.3);cursor:pointer;transition:border-color .3s,box-shadow .3s,background .3s;background:transparent}
+.btn-ghost:hover{border-color:var(--green);background:rgba(90,173,45,0.15);box-shadow:0 4px 15px rgba(90,173,45,0.2)}
 
-/* HERO CAROUSEL */
-.hero-carousel{margin-top:48px;position:relative;width:100%;max-width:850px;margin-left:auto;margin-right:auto;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(43,90,20,0.12);border:1px solid var(--border)}
-.carousel-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1);will-change:transform}
-.carousel-slide{min-width:100%;position:relative}
-.carousel-slide img{width:100%;height:380px;object-fit:cover;display:block}
-.carousel-slide .slide-caption{position:absolute;bottom:0;left:0;right:0;padding:24px 32px;background:linear-gradient(transparent,rgba(15,26,10,.75));color:#fff}
-.carousel-slide .slide-caption h3{font-size:1.05rem;font-weight:700;margin-bottom:4px}
-.carousel-slide .slide-caption p{font-size:.82rem;opacity:.85;line-height:1.5}
-.carousel-nav{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:20px}
-.carousel-dot{width:10px;height:10px;border-radius:50%;background:var(--border);border:none;cursor:pointer;transition:background .3s,transform .3s;padding:0}
-.carousel-dot.active{background:var(--green);transform:scale(1.3)}
-.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border:none;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.4rem;font-weight:300;color:var(--green-dark);box-shadow:0 2px 12px rgba(0,0,0,.1);transition:background .3s,transform .3s;z-index:5}
-.carousel-btn:hover{background:#fff;transform:translateY(-50%) scale(1.08)}
-.carousel-btn.prev{left:14px}
-.carousel-btn.next{right:14px}
+/* Carousel dots over hero */
+.carousel-nav{display:flex;justify-content:center;align-items:center;gap:10px;position:relative;z-index:3}
+.carousel-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.35);border:none;cursor:pointer;transition:background .3s,transform .3s;padding:0}
+.carousel-dot.active{background:#fff;transform:scale(1.3)}
+/* Slide label */
+.slide-label{color:rgba(255,255,255,0.6);font-size:.78rem;font-weight:500;text-align:center;margin-top:12px;min-height:20px;transition:opacity .4s}
 
 /* PARTICLES CANVAS */
 #particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
@@ -198,7 +198,6 @@ a{text-decoration:none;color:inherit}
   .orq-ring.r3{width:480px;height:480px}
   .phases-grid{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .carousel-slide img{height:320px}
 }
 @media(max-width:768px){
   .nav-links{display:none}
@@ -218,11 +217,6 @@ a{text-decoration:none;color:inherit}
   .cta-box{padding:48px 24px}
   .cta-box h2{font-size:1.8rem}
   .footer-inner{flex-direction:column;text-align:center}
-  .carousel-slide img{height:240px}
-  .carousel-slide .slide-caption{padding:16px 20px}
-  .carousel-slide .slide-caption h3{font-size:.9rem}
-  .carousel-slide .slide-caption p{font-size:.75rem}
-  .carousel-btn{width:34px;height:34px;font-size:1.1rem}
 }
 </style>
 </head>
@@ -243,6 +237,26 @@ a{text-decoration:none;color:inherit}
 </nav>
 
 <section class="hero">
+  <!-- Background Carousel -->
+  <div class="hero-bg-carousel" id="heroBgCarousel">
+    <div class="hero-bg-slide active" data-label="Registro de Plaguicidas en Chile y LATAM">
+      <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&h=900&fit=crop&q=80" alt="Campos agr&iacute;colas">
+    </div>
+    <div class="hero-bg-slide" data-label="An&aacute;lisis Toxicol&oacute;gico con IA">
+      <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1600&h=900&fit=crop&q=80" alt="Laboratorio">
+    </div>
+    <div class="hero-bg-slide" data-label="11 Agentes de IA Especializados">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&h=900&fit=crop&q=80" alt="Tecnolog&iacute;a IA">
+    </div>
+    <div class="hero-bg-slide" data-label="Dossier T&eacute;cnico Automatizado">
+      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&h=900&fit=crop&q=80" alt="Documentaci&oacute;n">
+    </div>
+    <div class="hero-bg-slide" data-label="Seguridad y Compliance Garantizados">
+      <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1600&h=900&fit=crop&q=80" alt="Compliance">
+    </div>
+    <div class="hero-bg-overlay"></div>
+  </div>
+
   <div class="container">
     <div class="hero-content">
       <div class="hero-badge">Primera en Chile &middot; Consultora AI-First</div>
@@ -252,51 +266,8 @@ a{text-decoration:none;color:inherit}
         <a href="#contacto" class="btn-glow">Agenda una consulta &rarr;</a>
         <a href="#agentes" class="btn-ghost">Conoce los agentes</a>
       </div>
-
-      <!-- CAROUSEL -->
-      <div class="hero-carousel">
-        <button class="carousel-btn prev" onclick="moveSlide(-1)" aria-label="Anterior">&#8249;</button>
-        <button class="carousel-btn next" onclick="moveSlide(1)" aria-label="Siguiente">&#8250;</button>
-        <div class="carousel-track" id="carouselTrack">
-          <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=900&h=450&fit=crop&q=80" alt="Campos agr&iacute;colas - registro de plaguicidas" loading="eager">
-            <div class="slide-caption">
-              <h3>Registro de Plaguicidas en Chile y LATAM</h3>
-              <p>Automatizamos el proceso completo: desde la clasificaci&oacute;n regulatoria hasta la aprobaci&oacute;n final por SAG.</p>
-            </div>
-          </div>
-          <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=900&h=450&fit=crop&q=80" alt="Laboratorio de an&aacute;lisis toxicol&oacute;gico" loading="lazy">
-            <div class="slide-caption">
-              <h3>An&aacute;lisis Toxicol&oacute;gico con IA</h3>
-              <p>Evaluaci&oacute;n de riesgo y perfiles toxicol&oacute;gicos conforme a marcos OECD, EPA y normativa local.</p>
-            </div>
-          </div>
-          <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&h=450&fit=crop&q=80" alt="Tecnolog&iacute;a e inteligencia artificial" loading="lazy">
-            <div class="slide-caption">
-              <h3>11 Agentes de IA Especializados</h3>
-              <p>Tecnolog&iacute;a de vanguardia aplicada a la regulaci&oacute;n agroqu&iacute;mica. 3 agentes gratuitos de pre-registro.</p>
-            </div>
-          </div>
-          <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&h=450&fit=crop&q=80" alt="Documentaci&oacute;n y dossier t&eacute;cnico" loading="lazy">
-            <div class="slide-caption">
-              <h3>Dossier T&eacute;cnico Automatizado</h3>
-              <p>Compilaci&oacute;n y estructuraci&oacute;n de expedientes seg&uacute;n formatos exigidos por SAG y autoridades LATAM.</p>
-            </div>
-          </div>
-          <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=900&h=450&fit=crop&q=80" alt="Seguridad y compliance regulatorio" loading="lazy">
-            <div class="slide-caption">
-              <h3>Seguridad y Compliance Garantizados</h3>
-              <p>Monitoreo regulatorio 24/7 y auditor&iacute;a autom&aacute;tica de documentaci&oacute;n y vigencias.</p>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="carousel-nav" id="carouselDots"></div>
-
+      <div class="slide-label" id="slideLabel">Registro de Plaguicidas en Chile y LATAM</div>
     </div>
   </div>
 </section>
@@ -473,38 +444,37 @@ a{text-decoration:none;color:inherit}
 <div class="agent-tooltip" id="tooltip"></div>
 
 <script>
-/* CAROUSEL */
-let currentSlide=0,autoplayTimer;
-const track=document.getElementById('carouselTrack');
-const totalSlides=track.children.length;
-const dotsContainer=document.getElementById('carouselDots');
-for(let i=0;i<totalSlides;i++){
-  const d=document.createElement('button');
+/* BACKGROUND CAROUSEL */
+var bgSlides=document.querySelectorAll('.hero-bg-slide');
+var slideLabel=document.getElementById('slideLabel');
+var dotsContainer=document.getElementById('carouselDots');
+var currentBg=0,bgTimer;
+var totalBg=bgSlides.length;
+
+for(var i=0;i<totalBg;i++){
+  var d=document.createElement('button');
   d.className='carousel-dot'+(i===0?' active':'');
   d.setAttribute('aria-label','Slide '+(i+1));
-  d.onclick=function(){goSlide(i)};
+  (function(idx){d.onclick=function(){goSlide(idx)}})(i);
   dotsContainer.appendChild(d);
 }
+
 function goSlide(n){
-  currentSlide=((n%totalSlides)+totalSlides)%totalSlides;
-  track.style.transform='translateX(-'+currentSlide*100+'%)';
+  bgSlides[currentBg].classList.remove('active');
+  currentBg=((n%totalBg)+totalBg)%totalBg;
+  bgSlides[currentBg].classList.add('active');
   var dots=document.querySelectorAll('.carousel-dot');
-  for(var i=0;i<dots.length;i++){dots[i].className=i===currentSlide?'carousel-dot active':'carousel-dot'}
-  resetAutoplay();
+  for(var j=0;j<dots.length;j++){dots[j].className=j===currentBg?'carousel-dot active':'carousel-dot'}
+  var label=bgSlides[currentBg].getAttribute('data-label');
+  slideLabel.style.opacity='0';
+  setTimeout(function(){slideLabel.textContent=label;slideLabel.style.opacity='1'},300);
+  resetBgTimer();
 }
-function moveSlide(dir){goSlide(currentSlide+dir)}
-function resetAutoplay(){clearInterval(autoplayTimer);autoplayTimer=setInterval(function(){moveSlide(1)},5000)}
-resetAutoplay();
-/* pause on hover */
-document.querySelector('.hero-carousel').addEventListener('mouseenter',function(){clearInterval(autoplayTimer)});
-document.querySelector('.hero-carousel').addEventListener('mouseleave',function(){resetAutoplay()});
-/* swipe support */
-var touchStartX=0,touchEndX=0;
-track.addEventListener('touchstart',function(e){touchStartX=e.changedTouches[0].screenX},{passive:true});
-track.addEventListener('touchend',function(e){touchEndX=e.changedTouches[0].screenX;if(touchStartX-touchEndX>50)moveSlide(1);if(touchEndX-touchStartX>50)moveSlide(-1)},{passive:true});
+function resetBgTimer(){clearInterval(bgTimer);bgTimer=setInterval(function(){goSlide(currentBg+1)},5000)}
+resetBgTimer();
 
 /* AGENT TOOLTIPS */
-const agents={
+var agents={
   vigilancia:{name:"Agente de Vigilancia Regulatoria",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Monitorea cambios normativos en SAG, ISP, Diario Oficial y SEREMI en tiempo real. Alerta autom\u00e1tica sobre regulaciones que afectan tus registros activos.",free:true},
   clasificacion:{name:"Agente de Clasificaci\u00f3n Regulatoria",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Determina la categor\u00eda regulatoria del producto (fitosanitario, fertilizante, coadyuvante) y la entidad reguladora correspondiente.",free:true},
   normativo:{name:"Agente de An\u00e1lisis Normativo",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Analiza legislaci\u00f3n vigente (DS 3557, Ley 3557, RSA 977/96, normativa SAG). Responde consultas regulatorias citando la norma aplicable.",free:true},
@@ -517,7 +487,7 @@ const agents={
   qa:{name:"Agente de QA / Compliance",phase:"Post-Registro",phaseClass:"tt-post",desc:"Verifica calidad y cumplimiento continuo post-registro. Auditor\u00eda autom\u00e1tica de documentaci\u00f3n y vigencias."},
   comunicacion:{name:"Agente de Comunicaci\u00f3n Regulatoria",phase:"Post-Registro",phaseClass:"tt-post",desc:"Gestiona comunicaci\u00f3n formal con autoridades regulatorias. Genera oficios, respuestas y seguimiento de tr\u00e1mites."}
 };
-const tooltip=document.getElementById('tooltip');
+var tooltip=document.getElementById('tooltip');
 document.querySelectorAll('.agent-node').forEach(function(node){
   node.addEventListener('mouseenter',function(e){
     var a=agents[node.dataset.agent];if(!a)return;
@@ -537,7 +507,7 @@ var W,H,particles=[],mouse={x:0,y:0};
 function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
 window.addEventListener('resize',resize);resize();
 document.addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY});
-for(var i=0;i<40;i++)particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,r:Math.random()*2+.5,o:Math.random()*.15+.05});
+for(var pi=0;pi<40;pi++)particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,r:Math.random()*2+.5,o:Math.random()*.15+.05});
 function drawParticles(){
   ctx.clearRect(0,0,W,H);
   particles.forEach(function(p){
