@@ -19,8 +19,6 @@ a{text-decoration:none;color:inherit}
   --text:#1a2e1a;--text-dim:#5a6b52;--text-heading:#0f1a0a;
 }
 .container{max-width:1200px;margin:0 auto;padding:0 24px}
-
-/* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px;max-width:1200px;margin:0 auto;padding:0 24px}
 .nav-logo{font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,var(--green-dark),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -32,7 +30,6 @@ a{text-decoration:none;color:inherit}
 .nav-mobile{display:none;background:none;border:none;cursor:pointer;padding:8px}
 .nav-mobile span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;border-radius:2px}
 
-/* HERO WITH BACKGROUND CAROUSEL */
 .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 0 80px}
 .hero-bg-carousel{position:absolute;inset:0;z-index:0}
 .hero-bg-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease-in-out}
@@ -61,14 +58,10 @@ a{text-decoration:none;color:inherit}
 .slide-label{color:rgba(255,255,255,0.6);font-size:.78rem;font-weight:500;text-align:center;margin-top:12px;min-height:20px;transition:opacity .4s}
 
 #particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
-
-/* STATS */
 .stats{padding:60px 0;background:var(--green-dark);position:relative;z-index:2}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center}
 .stat-num{font-size:2.8rem;font-weight:900;color:#fff}
 .stat-label{font-size:.85rem;color:rgba(255,255,255,0.7);margin-top:4px}
-
-/* SECTIONS */
 .section{padding:120px 0;position:relative;z-index:2}
 .section-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(90,173,45,0.08);border:1px solid rgba(90,173,45,0.2);color:var(--green-dark);padding:6px 16px;border-radius:50px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
 .section-title{font-size:2.8rem;font-weight:900;letter-spacing:-.03em;line-height:1.15;margin-bottom:16px;color:var(--text-heading)}
@@ -77,7 +70,6 @@ a{text-decoration:none;color:inherit}
 .section-header.center{text-align:center}
 .section-header.center .section-sub{margin:0 auto}
 
-/* ORCHESTRATOR DIAGRAM */
 .diagram-section{padding:120px 0;position:relative;z-index:2;overflow:hidden;background:linear-gradient(180deg,#fff 0%,#f0fae8 50%,#fff 100%)}
 .diagram-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(90,173,45,0.04) 0%,transparent 70%)}
 .diagram-wrap{position:relative;width:700px;height:700px;margin:0 auto}
@@ -112,7 +104,6 @@ a{text-decoration:none;color:inherit}
 .conn-line{stroke:rgba(43,90,20,0.1);stroke-width:1;fill:none}
 .data-pulse{fill:var(--green);r:3;opacity:0}
 
-/* PHASES SECTION */
 .phases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
 .phase-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:32px;transition:border-color .3s,box-shadow .3s;position:relative;overflow:hidden}
 .phase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
@@ -134,33 +125,30 @@ a{text-decoration:none;color:inherit}
 .pc-post .dot{background:#ea580c}
 .free-tag{background:rgba(59,130,246,0.06);border-color:rgba(59,130,246,0.25);color:#1d4ed8}
 
-/* PRICING COMPARISON */
+/* PRICING COMPARISON - 3 columns */
 .pricing-section{padding:120px 0;position:relative;z-index:2;background:var(--bg2)}
 .compare-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(43,90,20,0.06);background:#fff}
-.compare-table thead th{padding:24px 20px;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-bottom:2px solid var(--border)}
-.compare-table thead th:first-child{text-align:left;color:var(--text-dim);background:#fff;width:30%}
-.compare-table thead .th-trad{background:#f9fafb;color:#6b7280;width:25%}
-.compare-table thead .th-ia{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;width:25%}
-.compare-table thead .th-diff{background:#fff;color:var(--green-dark);width:20%}
-.compare-table tbody td{padding:18px 20px;font-size:.88rem;border-bottom:1px solid rgba(43,90,20,0.06);vertical-align:middle}
+.compare-table thead th{padding:24px 24px;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-bottom:2px solid var(--border)}
+.compare-table thead th:first-child{text-align:left;color:var(--text-dim);background:#fff;width:32%}
+.compare-table thead .th-trad{background:#f9fafb;color:#6b7280;width:32%}
+.compare-table thead .th-ia{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;width:36%}
+.compare-table tbody td{padding:18px 24px;font-size:.88rem;border-bottom:1px solid rgba(43,90,20,0.06);vertical-align:middle}
 .compare-table tbody tr:last-child td{border-bottom:none}
 .compare-table tbody tr:hover{background:rgba(90,173,45,0.02)}
 .compare-table tbody td:first-child{font-weight:700;color:var(--text-heading)}
 .compare-table tbody .td-trad{color:#6b7280;background:rgba(249,250,251,0.5)}
 .compare-table tbody .td-ia{color:var(--green-dark);font-weight:600;background:rgba(90,173,45,0.03)}
-.compare-table tbody .td-diff{text-align:center}
-.diff-badge{display:inline-flex;align-items:center;gap:4px;padding:5px 14px;border-radius:20px;font-size:.78rem;font-weight:800;letter-spacing:.02em}
-.diff-green{background:rgba(90,173,45,0.1);color:var(--green-dark)}
-.diff-blue{background:rgba(59,130,246,0.1);color:#1d4ed8}
-.diff-free{background:linear-gradient(135deg,rgba(37,99,235,0.1),rgba(59,130,246,0.15));color:#1d4ed8;font-size:.85rem}
-.phase-separator td{background:rgba(43,90,20,0.04)!important;padding:10px 20px!important;font-size:.7rem!important;font-weight:700!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:var(--text-dim)!important}
+.td-ia-content{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.td-ia-text{flex:1}
+.diff-badge{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:20px;font-size:.72rem;font-weight:800;letter-spacing:.02em;white-space:nowrap;flex-shrink:0}
+.diff-green{background:rgba(90,173,45,0.12);color:var(--green-dark)}
+.diff-free{background:linear-gradient(135deg,rgba(37,99,235,0.1),rgba(59,130,246,0.18));color:#1d4ed8;font-size:.78rem}
+.phase-separator td{background:rgba(43,90,20,0.04)!important;padding:10px 24px!important;font-size:.7rem!important;font-weight:700!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:var(--text-dim)!important}
 .phase-separator .ps-pre{color:#2563eb!important}
 .phase-separator .ps-reg{color:var(--green-dark)!important}
 .phase-separator .ps-post{color:#c2410c!important}
-/* summary row */
 .compare-table tbody .summary-row td{background:rgba(43,90,20,0.06);font-weight:800;border-top:2px solid var(--border)}
-.compare-table tbody .summary-row .td-ia{color:var(--green-dark);font-size:.95rem}
-.compare-table tbody .summary-row .td-diff .diff-badge{font-size:.9rem;padding:6px 18px}
+.compare-table tbody .summary-row .td-ia{color:var(--green-dark);font-size:.92rem}
 
 /* Mobile comparison */
 .compare-mobile{display:none}
@@ -170,16 +158,13 @@ a{text-decoration:none;color:inherit}
 .cm-label{color:var(--text-dim);font-weight:500}
 .cm-val{font-weight:600}
 .cm-val.trad{color:#6b7280}
-.cm-val.ia{color:var(--green-dark)}
+.cm-val.ia{color:var(--green-dark);display:flex;align-items:center;gap:8px}
 
-/* CTA SECTION */
 .cta-section{padding:120px 0;position:relative;z-index:2;background:#fff}
 .cta-box{background:linear-gradient(135deg,var(--green-dark),#1a4a0e);border:none;border-radius:24px;padding:80px 60px;text-align:center;position:relative;overflow:hidden}
 .cta-box::before{content:'';position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(90,173,45,0.2),transparent 70%);border-radius:50%}
 .cta-box h2{font-size:2.5rem;font-weight:900;color:#fff;margin-bottom:16px}
 .cta-box p{color:rgba(255,255,255,0.8);font-size:1.1rem;max-width:600px;margin:0 auto 40px;line-height:1.7}
-
-/* CONTACT FORM */
 .contact-form{max-width:500px;margin:0 auto;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:16px;padding:36px;backdrop-filter:blur(10px)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-group{margin-bottom:14px}
@@ -194,8 +179,6 @@ a{text-decoration:none;color:inherit}
 .form-submit:hover{box-shadow:0 8px 30px rgba(90,173,45,0.4);transform:translateY(-2px)}
 .form-note{text-align:center;font-size:.75rem;color:rgba(255,255,255,0.5);margin-top:10px}
 .form-success{display:none;text-align:center;padding:16px;background:rgba(90,173,45,0.2);border-radius:10px;margin-top:14px;color:#7BC950;font-weight:600;font-size:.9rem}
-
-/* FOOTER */
 .footer{border-top:1px solid var(--border);padding:40px 0;position:relative;z-index:2;background:#fff}
 .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 .footer-logo{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,var(--green-dark),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -203,7 +186,6 @@ a{text-decoration:none;color:inherit}
 .footer-links a{font-size:.85rem;color:var(--text-dim);transition:color .3s}
 .footer-links a:hover{color:var(--green)}
 .footer-copy{width:100%;text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);font-size:.78rem;color:var(--text-dim)}
-
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
@@ -212,29 +194,21 @@ a{text-decoration:none;color:inherit}
   .diagram-wrap{width:500px;height:500px}
   .agent-node{width:70px;height:70px;font-size:.55rem}
   .orq-center{width:100px;height:100px;font-size:.75rem}
-  .orq-ring.r1{width:260px;height:260px}
-  .orq-ring.r2{width:380px;height:380px}
-  .orq-ring.r3{width:480px;height:480px}
+  .orq-ring.r1{width:260px;height:260px}.orq-ring.r2{width:380px;height:380px}.orq-ring.r3{width:480px;height:480px}
   .phases-grid{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:768px){
-  .nav-links{display:none}
-  .nav-mobile{display:block}
-  .hero h1{font-size:2rem}
-  .hero .lead{font-size:1rem}
-  .section{padding:80px 0}
-  .section-title{font-size:2rem}
+  .nav-links{display:none}.nav-mobile{display:block}
+  .hero h1{font-size:2rem}.hero .lead{font-size:1rem}
+  .section{padding:80px 0}.section-title{font-size:2rem}
   .diagram-wrap{width:340px;height:340px}
   .agent-node{width:55px;height:55px;font-size:.5rem}
   .orq-center{width:80px;height:80px;font-size:.65rem}
-  .orq-ring.r1{width:180px;height:180px}
-  .orq-ring.r2{width:260px;height:260px}
-  .orq-ring.r3{width:330px;height:330px}
+  .orq-ring.r1{width:180px;height:180px}.orq-ring.r2{width:260px;height:260px}.orq-ring.r3{width:330px;height:330px}
   .form-row{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:repeat(2,1fr);gap:20px}
-  .cta-box{padding:48px 24px}
-  .cta-box h2{font-size:1.8rem}
+  .cta-box{padding:48px 24px}.cta-box h2{font-size:1.8rem}
   .footer-inner{flex-direction:column;text-align:center}
   .compare-table{display:none}
   .compare-mobile{display:block}
@@ -261,21 +235,11 @@ a{text-decoration:none;color:inherit}
 
 <section class="hero">
   <div class="hero-bg-carousel" id="heroBgCarousel">
-    <div class="hero-bg-slide active" data-label="Registro de Plaguicidas en Chile y LATAM">
-      <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&h=900&fit=crop&q=80" alt="Campos agr&iacute;colas">
-    </div>
-    <div class="hero-bg-slide" data-label="An&aacute;lisis Toxicol&oacute;gico con IA">
-      <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1600&h=900&fit=crop&q=80" alt="Laboratorio">
-    </div>
-    <div class="hero-bg-slide" data-label="11 Agentes de IA Especializados">
-      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&h=900&fit=crop&q=80" alt="Tecnolog&iacute;a IA">
-    </div>
-    <div class="hero-bg-slide" data-label="Dossier T&eacute;cnico Automatizado">
-      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&h=900&fit=crop&q=80" alt="Documentaci&oacute;n">
-    </div>
-    <div class="hero-bg-slide" data-label="Seguridad y Compliance Garantizados">
-      <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1600&h=900&fit=crop&q=80" alt="Compliance">
-    </div>
+    <div class="hero-bg-slide active" data-label="Registro de Plaguicidas en Chile y LATAM"><img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&h=900&fit=crop&q=80" alt="Campos agr&iacute;colas"></div>
+    <div class="hero-bg-slide" data-label="An&aacute;lisis Toxicol&oacute;gico con IA"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1600&h=900&fit=crop&q=80" alt="Laboratorio"></div>
+    <div class="hero-bg-slide" data-label="11 Agentes de IA Especializados"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&h=900&fit=crop&q=80" alt="Tecnolog&iacute;a IA"></div>
+    <div class="hero-bg-slide" data-label="Dossier T&eacute;cnico Automatizado"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&h=900&fit=crop&q=80" alt="Documentaci&oacute;n"></div>
+    <div class="hero-bg-slide" data-label="Seguridad y Compliance Garantizados"><img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1600&h=900&fit=crop&q=80" alt="Compliance"></div>
     <div class="hero-bg-overlay"></div>
   </div>
   <div class="container">
@@ -313,9 +277,7 @@ a{text-decoration:none;color:inherit}
     </div>
     <div class="diagram-wrap" id="diagram">
       <svg class="connections-svg" id="connSvg"></svg>
-      <div class="orq-ring r1"></div>
-      <div class="orq-ring r2"></div>
-      <div class="orq-ring r3"></div>
+      <div class="orq-ring r1"></div><div class="orq-ring r2"></div><div class="orq-ring r3"></div>
       <div class="orq-center"><div class="orq-icon">&#x1F9E0;</div>ORQUESTADOR</div>
       <div class="agent-node phase-pre" data-agent="vigilancia" style="top:2%;left:50%;transform:translate(-50%,0)"><span class="free-badge">GRATIS</span><div class="node-icon">&#x1F6E1;</div><div class="node-name">Vigilancia</div></div>
       <div class="agent-node phase-pre" data-agent="clasificacion" style="top:10%;left:18%"><span class="free-badge">GRATIS</span><div class="node-icon">&#x1F50D;</div><div class="node-name">Clasificaci&oacute;n</div></div>
@@ -373,7 +335,6 @@ a{text-decoration:none;color:inherit}
   </div>
 </section>
 
-<!-- PRICING COMPARISON -->
 <section class="pricing-section" id="comparativa">
   <div class="container">
     <div class="section-header center reveal">
@@ -382,192 +343,159 @@ a{text-decoration:none;color:inherit}
       <p class="section-sub">Cada servicio comparado: misma calidad, fracci&oacute;n del tiempo y costo. Pre-registro completamente gratuito.</p>
     </div>
 
-    <!-- Desktop table -->
     <table class="compare-table reveal">
       <thead>
         <tr>
           <th>Servicio</th>
           <th class="th-trad">Consultora Tradicional</th>
           <th class="th-ia">RegulatorIA (IA)</th>
-          <th class="th-diff">Ventaja</th>
         </tr>
       </thead>
       <tbody>
-        <!-- PRE-REGISTRO -->
-        <tr class="phase-separator"><td colspan="4"><span class="ps-pre">Fase 01 &middot; Pre-Registro</span></td></tr>
+        <tr class="phase-separator"><td colspan="3"><span class="ps-pre">Fase 01 &middot; Pre-Registro</span></td></tr>
         <tr>
           <td>Vigilancia Regulatoria</td>
           <td class="td-trad">Revisi&oacute;n manual peri&oacute;dica</td>
-          <td class="td-ia">Monitoreo automatizado 24/7</td>
-          <td class="td-diff"><span class="diff-badge diff-free">GRATIS</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Monitoreo automatizado 24/7</span><span class="diff-badge diff-free">GRATIS</span></div></td>
         </tr>
         <tr>
           <td>Clasificaci&oacute;n Regulatoria</td>
           <td class="td-trad">1-2 semanas, cobro por hora</td>
-          <td class="td-ia">Minutos, autom&aacute;tico</td>
-          <td class="td-diff"><span class="diff-badge diff-free">GRATIS</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Minutos, autom&aacute;tico</span><span class="diff-badge diff-free">GRATIS</span></div></td>
         </tr>
         <tr>
           <td>An&aacute;lisis Normativo</td>
           <td class="td-trad">Consulta por hora profesional</td>
-          <td class="td-ia">Respuesta instant&aacute;nea con cita legal</td>
-          <td class="td-diff"><span class="diff-badge diff-free">GRATIS</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Respuesta instant&aacute;nea con cita legal</span><span class="diff-badge diff-free">GRATIS</span></div></td>
         </tr>
-        <!-- REGISTRO -->
-        <tr class="phase-separator"><td colspan="4"><span class="ps-reg">Fase 02 &middot; Registro</span></td></tr>
+        <tr class="phase-separator"><td colspan="3"><span class="ps-reg">Fase 02 &middot; Registro</span></td></tr>
         <tr>
           <td>Estrategia de Registro</td>
           <td class="td-trad">2-4 semanas</td>
-          <td class="td-ia">2-3 d&iacute;as</td>
-          <td class="td-diff"><span class="diff-badge diff-green">5x m&aacute;s r&aacute;pido</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">2-3 d&iacute;as</span><span class="diff-badge diff-green">5x m&aacute;s r&aacute;pido</span></div></td>
         </tr>
         <tr>
           <td>Dossier T&eacute;cnico</td>
           <td class="td-trad">4-8 semanas</td>
-          <td class="td-ia">1-2 semanas</td>
-          <td class="td-diff"><span class="diff-badge diff-green">4x m&aacute;s r&aacute;pido</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">1-2 semanas</span><span class="diff-badge diff-green">4x m&aacute;s r&aacute;pido</span></div></td>
         </tr>
         <tr>
           <td>An&aacute;lisis Toxicol&oacute;gico</td>
           <td class="td-trad">Costo base alto (estudios externos)</td>
-          <td class="td-ia">QSAR + modelado IA</td>
-          <td class="td-diff"><span class="diff-badge diff-green">-80% costo</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">QSAR + modelado IA</span><span class="diff-badge diff-green">-80% costo</span></div></td>
         </tr>
         <tr>
           <td>Eficacia Agron&oacute;mica</td>
           <td class="td-trad">3-6 semanas de an&aacute;lisis</td>
-          <td class="td-ia">1 semana automatizada</td>
-          <td class="td-diff"><span class="diff-badge diff-green">4x m&aacute;s r&aacute;pido</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">1 semana automatizada</span><span class="diff-badge diff-green">4x m&aacute;s r&aacute;pido</span></div></td>
         </tr>
         <tr>
           <td>Etiquetado y SDS</td>
           <td class="td-trad">2-3 semanas por producto</td>
-          <td class="td-ia">2-3 d&iacute;as por producto</td>
-          <td class="td-diff"><span class="diff-badge diff-green">5x m&aacute;s r&aacute;pido</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">2-3 d&iacute;as por producto</span><span class="diff-badge diff-green">5x m&aacute;s r&aacute;pido</span></div></td>
         </tr>
         <tr>
           <td>An&aacute;lisis LMR</td>
           <td class="td-trad">Revisi&oacute;n manual Codex + local</td>
-          <td class="td-ia">Cruce autom&aacute;tico multi-base</td>
-          <td class="td-diff"><span class="diff-badge diff-green">-75% costo</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Cruce autom&aacute;tico multi-base</span><span class="diff-badge diff-green">-75% costo</span></div></td>
         </tr>
-        <!-- POST-REGISTRO -->
-        <tr class="phase-separator"><td colspan="4"><span class="ps-post">Fase 03 &middot; Post-Registro</span></td></tr>
+        <tr class="phase-separator"><td colspan="3"><span class="ps-post">Fase 03 &middot; Post-Registro</span></td></tr>
         <tr>
           <td>QA / Compliance</td>
           <td class="td-trad">Auditor&iacute;a peri&oacute;dica (trimestral)</td>
-          <td class="td-ia">Monitoreo continuo automatizado</td>
-          <td class="td-diff"><span class="diff-badge diff-green">24/7</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Monitoreo continuo automatizado</span><span class="diff-badge diff-green">24/7</span></div></td>
         </tr>
         <tr>
           <td>Comunicaci&oacute;n Regulatoria</td>
           <td class="td-trad">Gesti&oacute;n manual de oficios</td>
-          <td class="td-ia">Generaci&oacute;n y seguimiento autom&aacute;tico</td>
-          <td class="td-diff"><span class="diff-badge diff-green">3x m&aacute;s r&aacute;pido</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Generaci&oacute;n y seguimiento autom&aacute;tico</span><span class="diff-badge diff-green">3x m&aacute;s r&aacute;pido</span></div></td>
         </tr>
-        <!-- SUMMARY -->
-        <tr class="phase-separator"><td colspan="4"><span>Resumen Global</span></td></tr>
+        <tr class="phase-separator"><td colspan="3"><span>Resumen Global</span></td></tr>
         <tr class="summary-row">
           <td>Tiempo total por registro</td>
           <td class="td-trad">12-24 meses</td>
-          <td class="td-ia">3-6 meses</td>
-          <td class="td-diff"><span class="diff-badge diff-green">4x m&aacute;s r&aacute;pido</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">3-6 meses</span><span class="diff-badge diff-green">4x m&aacute;s r&aacute;pido</span></div></td>
         </tr>
         <tr class="summary-row">
           <td>Tasa de errores documentales</td>
           <td class="td-trad">15-25%</td>
-          <td class="td-ia">&lt;2%</td>
-          <td class="td-diff"><span class="diff-badge diff-green">-90% errores</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">&lt;2%</span><span class="diff-badge diff-green">-90% errores</span></div></td>
         </tr>
         <tr class="summary-row">
           <td>Costo total por producto</td>
           <td class="td-trad">Base ($$$$)</td>
-          <td class="td-ia">Fracci&oacute;n del costo</td>
-          <td class="td-diff"><span class="diff-badge diff-green">-60% a -80%</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Fracci&oacute;n del costo</span><span class="diff-badge diff-green">-60% a -80%</span></div></td>
         </tr>
         <tr class="summary-row">
           <td>Escalabilidad (multi-pa&iacute;s)</td>
           <td class="td-trad">Lineal: m&aacute;s equipo por pa&iacute;s</td>
-          <td class="td-ia">Paralelo: mismos agentes</td>
-          <td class="td-diff"><span class="diff-badge diff-green">&#x221e; escalable</span></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Paralelo: mismos agentes</span><span class="diff-badge diff-green">&#x221e; escalable</span></div></td>
         </tr>
       </tbody>
     </table>
 
-    <!-- Mobile cards -->
     <div class="compare-mobile">
       <div class="cm-card reveal">
         <div class="cm-service">Vigilancia Regulatoria</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Manual, peri&oacute;dica</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">24/7 automatizada</span></div>
-        <div class="cm-row"><span class="cm-label">Ventaja</span><span class="diff-badge diff-free">GRATIS</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">24/7 automatizada <span class="diff-badge diff-free">GRATIS</span></span></div>
       </div>
       <div class="cm-card reveal">
         <div class="cm-service">Clasificaci&oacute;n Regulatoria</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">1-2 semanas</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Minutos</span></div>
-        <div class="cm-row"><span class="cm-label">Ventaja</span><span class="diff-badge diff-free">GRATIS</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Minutos <span class="diff-badge diff-free">GRATIS</span></span></div>
       </div>
       <div class="cm-card reveal">
         <div class="cm-service">An&aacute;lisis Normativo</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Cobro por hora</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Instant&aacute;neo</span></div>
-        <div class="cm-row"><span class="cm-label">Ventaja</span><span class="diff-badge diff-free">GRATIS</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Instant&aacute;neo <span class="diff-badge diff-free">GRATIS</span></span></div>
       </div>
       <div class="cm-card reveal">
         <div class="cm-service">Estrategia de Registro</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">2-4 semanas</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">2-3 d&iacute;as</span></div>
-        <div class="cm-row"><span class="cm-label">Ventaja</span><span class="diff-badge diff-green">5x m&aacute;s r&aacute;pido</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">2-3 d&iacute;as <span class="diff-badge diff-green">5x</span></span></div>
       </div>
       <div class="cm-card reveal">
         <div class="cm-service">Dossier T&eacute;cnico</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">4-8 semanas</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">1-2 semanas</span></div>
-        <div class="cm-row"><span class="cm-label">Ventaja</span><span class="diff-badge diff-green">4x m&aacute;s r&aacute;pido</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">1-2 semanas <span class="diff-badge diff-green">4x</span></span></div>
       </div>
       <div class="cm-card reveal">
         <div class="cm-service">An&aacute;lisis Toxicol&oacute;gico</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Costo alto</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">QSAR + IA</span></div>
-        <div class="cm-row"><span class="cm-label">Ventaja</span><span class="diff-badge diff-green">-80% costo</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">QSAR + IA <span class="diff-badge diff-green">-80%</span></span></div>
       </div>
       <div class="cm-card reveal">
         <div class="cm-service">Eficacia Agron&oacute;mica</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">3-6 semanas</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">1 semana</span></div>
-        <div class="cm-row"><span class="cm-label">Ventaja</span><span class="diff-badge diff-green">4x m&aacute;s r&aacute;pido</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">1 semana <span class="diff-badge diff-green">4x</span></span></div>
       </div>
       <div class="cm-card reveal">
         <div class="cm-service">Etiquetado y SDS</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">2-3 semanas</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">2-3 d&iacute;as</span></div>
-        <div class="cm-row"><span class="cm-label">Ventaja</span><span class="diff-badge diff-green">5x m&aacute;s r&aacute;pido</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">2-3 d&iacute;as <span class="diff-badge diff-green">5x</span></span></div>
       </div>
       <div class="cm-card reveal">
         <div class="cm-service">An&aacute;lisis LMR</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Revisi&oacute;n manual</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Cruce autom&aacute;tico</span></div>
-        <div class="cm-row"><span class="cm-label">Ventaja</span><span class="diff-badge diff-green">-75% costo</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Cruce autom&aacute;tico <span class="diff-badge diff-green">-75%</span></span></div>
       </div>
       <div class="cm-card reveal">
         <div class="cm-service">QA / Compliance</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Trimestral</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Continuo 24/7</span></div>
-        <div class="cm-row"><span class="cm-label">Ventaja</span><span class="diff-badge diff-green">24/7</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Continuo <span class="diff-badge diff-green">24/7</span></span></div>
       </div>
       <div class="cm-card reveal">
         <div class="cm-service">Comunicaci&oacute;n Regulatoria</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Manual</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Automatizada</span></div>
-        <div class="cm-row"><span class="cm-label">Ventaja</span><span class="diff-badge diff-green">3x m&aacute;s r&aacute;pido</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Automatizada <span class="diff-badge diff-green">3x</span></span></div>
       </div>
       <div class="cm-card reveal" style="border-color:var(--green);background:rgba(90,173,45,0.02)">
         <div class="cm-service" style="color:var(--green-dark)">Resumen Global</div>
-        <div class="cm-row"><span class="cm-label">Tiempo total</span><span class="diff-badge diff-green">4x m&aacute;s r&aacute;pido</span></div>
-        <div class="cm-row"><span class="cm-label">Errores</span><span class="diff-badge diff-green">-90%</span></div>
-        <div class="cm-row"><span class="cm-label">Costo total</span><span class="diff-badge diff-green">-60% a -80%</span></div>
-        <div class="cm-row"><span class="cm-label">Escalabilidad</span><span class="diff-badge diff-green">&#x221e;</span></div>
+        <div class="cm-row"><span class="cm-label">Tiempo total</span><span class="cm-val ia">3-6 meses <span class="diff-badge diff-green">4x</span></span></div>
+        <div class="cm-row"><span class="cm-label">Errores</span><span class="cm-val ia">&lt;2% <span class="diff-badge diff-green">-90%</span></span></div>
+        <div class="cm-row"><span class="cm-label">Costo total</span><span class="cm-val ia">Fracci&oacute;n <span class="diff-badge diff-green">-60% a -80%</span></span></div>
+        <div class="cm-row"><span class="cm-label">Escalabilidad</span><span class="cm-val ia">Paralelo <span class="diff-badge diff-green">&#x221e;</span></span></div>
       </div>
     </div>
   </div>
@@ -627,114 +555,33 @@ a{text-decoration:none;color:inherit}
 <div class="agent-tooltip" id="tooltip"></div>
 
 <script>
-/* BACKGROUND CAROUSEL */
-var bgSlides=document.querySelectorAll('.hero-bg-slide');
-var slideLabel=document.getElementById('slideLabel');
-var dotsContainer=document.getElementById('carouselDots');
-var currentBg=0,bgTimer;
-var totalBg=bgSlides.length;
-for(var i=0;i<totalBg;i++){
-  var d=document.createElement('button');
-  d.className='carousel-dot'+(i===0?' active':'');
-  d.setAttribute('aria-label','Slide '+(i+1));
-  (function(idx){d.onclick=function(){goSlide(idx)}})(i);
-  dotsContainer.appendChild(d);
-}
-function goSlide(n){
-  bgSlides[currentBg].classList.remove('active');
-  currentBg=((n%totalBg)+totalBg)%totalBg;
-  bgSlides[currentBg].classList.add('active');
-  var dots=document.querySelectorAll('.carousel-dot');
-  for(var j=0;j<dots.length;j++){dots[j].className=j===currentBg?'carousel-dot active':'carousel-dot'}
-  var label=bgSlides[currentBg].getAttribute('data-label');
-  slideLabel.style.opacity='0';
-  setTimeout(function(){slideLabel.textContent=label;slideLabel.style.opacity='1'},300);
-  resetBgTimer();
-}
+var bgSlides=document.querySelectorAll('.hero-bg-slide'),slideLabel=document.getElementById('slideLabel'),dotsContainer=document.getElementById('carouselDots'),currentBg=0,bgTimer,totalBg=bgSlides.length;
+for(var i=0;i<totalBg;i++){var d=document.createElement('button');d.className='carousel-dot'+(i===0?' active':'');d.setAttribute('aria-label','Slide '+(i+1));(function(idx){d.onclick=function(){goSlide(idx)}})(i);dotsContainer.appendChild(d)}
+function goSlide(n){bgSlides[currentBg].classList.remove('active');currentBg=((n%totalBg)+totalBg)%totalBg;bgSlides[currentBg].classList.add('active');var dots=document.querySelectorAll('.carousel-dot');for(var j=0;j<dots.length;j++){dots[j].className=j===currentBg?'carousel-dot active':'carousel-dot'}var label=bgSlides[currentBg].getAttribute('data-label');slideLabel.style.opacity='0';setTimeout(function(){slideLabel.textContent=label;slideLabel.style.opacity='1'},300);resetBgTimer()}
 function resetBgTimer(){clearInterval(bgTimer);bgTimer=setInterval(function(){goSlide(currentBg+1)},5000)}
 resetBgTimer();
 
-/* AGENT TOOLTIPS */
-var agents={
-  vigilancia:{name:"Agente de Vigilancia Regulatoria",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Monitorea cambios normativos en SAG, ISP, Diario Oficial y SEREMI en tiempo real.",free:true},
-  clasificacion:{name:"Agente de Clasificaci\u00f3n Regulatoria",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Determina la categor\u00eda regulatoria del producto y la entidad reguladora correspondiente.",free:true},
-  normativo:{name:"Agente de An\u00e1lisis Normativo",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Analiza legislaci\u00f3n vigente. Responde consultas regulatorias citando la norma aplicable.",free:true},
-  estrategia:{name:"Agente de Estrategia de Registro",phase:"Registro",phaseClass:"tt-reg",desc:"Define la ruta regulatoria \u00f3ptima para cada producto en cada jurisdicci\u00f3n."},
-  dossier:{name:"Agente de Dossier T\u00e9cnico",phase:"Registro",phaseClass:"tt-reg",desc:"Compila y estructura la documentaci\u00f3n t\u00e9cnica del expediente seg\u00fan formatos SAG."},
-  toxicologia:{name:"Agente de Toxicolog\u00eda",phase:"Registro",phaseClass:"tt-reg",desc:"Analiza perfiles toxicol\u00f3gicos y evaluaci\u00f3n de riesgo conforme a marcos OECD y EPA."},
-  eficacia:{name:"Agente de Eficacia Agron\u00f3mica",phase:"Registro",phaseClass:"tt-reg",desc:"Eval\u00faa datos de campo y genera informes t\u00e9cnicos para el expediente."},
-  etiquetado:{name:"Agente de Etiquetado y SDS",phase:"Registro",phaseClass:"tt-reg",desc:"Genera etiquetas GHS/CLP y hojas de datos de seguridad seg\u00fan normativa vigente."},
-  lmr:{name:"Agente de LMR",phase:"Registro",phaseClass:"tt-reg",desc:"Calcula y verifica L\u00edmites M\u00e1ximos de Residuos vs. Codex Alimentarius y regulaciones locales."},
-  qa:{name:"Agente de QA / Compliance",phase:"Post-Registro",phaseClass:"tt-post",desc:"Auditor\u00eda autom\u00e1tica de documentaci\u00f3n y vigencias post-registro."},
-  comunicacion:{name:"Agente de Comunicaci\u00f3n Regulatoria",phase:"Post-Registro",phaseClass:"tt-post",desc:"Genera oficios, respuestas y seguimiento de tr\u00e1mites con autoridades."}
-};
+var agents={vigilancia:{name:"Agente de Vigilancia Regulatoria",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Monitorea cambios normativos en SAG, ISP, Diario Oficial y SEREMI en tiempo real.",free:true},clasificacion:{name:"Agente de Clasificaci\u00f3n Regulatoria",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Determina la categor\u00eda regulatoria del producto y la entidad reguladora correspondiente.",free:true},normativo:{name:"Agente de An\u00e1lisis Normativo",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Analiza legislaci\u00f3n vigente. Responde consultas regulatorias citando la norma aplicable.",free:true},estrategia:{name:"Agente de Estrategia de Registro",phase:"Registro",phaseClass:"tt-reg",desc:"Define la ruta regulatoria \u00f3ptima para cada producto en cada jurisdicci\u00f3n."},dossier:{name:"Agente de Dossier T\u00e9cnico",phase:"Registro",phaseClass:"tt-reg",desc:"Compila y estructura la documentaci\u00f3n t\u00e9cnica del expediente seg\u00fan formatos SAG."},toxicologia:{name:"Agente de Toxicolog\u00eda",phase:"Registro",phaseClass:"tt-reg",desc:"Analiza perfiles toxicol\u00f3gicos y evaluaci\u00f3n de riesgo conforme a marcos OECD y EPA."},eficacia:{name:"Agente de Eficacia Agron\u00f3mica",phase:"Registro",phaseClass:"tt-reg",desc:"Eval\u00faa datos de campo y genera informes t\u00e9cnicos para el expediente."},etiquetado:{name:"Agente de Etiquetado y SDS",phase:"Registro",phaseClass:"tt-reg",desc:"Genera etiquetas GHS/CLP y hojas de datos de seguridad seg\u00fan normativa vigente."},lmr:{name:"Agente de LMR",phase:"Registro",phaseClass:"tt-reg",desc:"Calcula y verifica L\u00edmites M\u00e1ximos de Residuos vs. Codex Alimentarius y regulaciones locales."},qa:{name:"Agente de QA / Compliance",phase:"Post-Registro",phaseClass:"tt-post",desc:"Auditor\u00eda autom\u00e1tica de documentaci\u00f3n y vigencias post-registro."},comunicacion:{name:"Agente de Comunicaci\u00f3n Regulatoria",phase:"Post-Registro",phaseClass:"tt-post",desc:"Genera oficios, respuestas y seguimiento de tr\u00e1mites con autoridades."}};
 var tooltip=document.getElementById('tooltip');
-document.querySelectorAll('.agent-node').forEach(function(node){
-  node.addEventListener('mouseenter',function(e){
-    var a=agents[node.dataset.agent];if(!a)return;
-    tooltip.innerHTML='<span class="tt-phase '+a.phaseClass+'">'+a.phase+(a.free?' \u00b7 GRATIS':'')+'</span><h3>'+a.name+'</h3><p>'+a.desc+'</p>';
-    tooltip.classList.add('show');
-  });
-  node.addEventListener('mousemove',function(e){
-    tooltip.style.left=Math.min(e.clientX+16,window.innerWidth-340)+'px';
-    tooltip.style.top=(e.clientY+16)+'px';
-  });
-  node.addEventListener('mouseleave',function(){tooltip.classList.remove('show')});
-});
+document.querySelectorAll('.agent-node').forEach(function(node){node.addEventListener('mouseenter',function(e){var a=agents[node.dataset.agent];if(!a)return;tooltip.innerHTML='<span class="tt-phase '+a.phaseClass+'">'+a.phase+(a.free?' \u00b7 GRATIS':'')+'</span><h3>'+a.name+'</h3><p>'+a.desc+'</p>';tooltip.classList.add('show')});node.addEventListener('mousemove',function(e){tooltip.style.left=Math.min(e.clientX+16,window.innerWidth-340)+'px';tooltip.style.top=(e.clientY+16)+'px'});node.addEventListener('mouseleave',function(){tooltip.classList.remove('show')})});
 
-/* PARTICLES */
-var canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
-var W,H,particles=[],mouse={x:0,y:0};
+var canvas=document.getElementById('particles'),ctx=canvas.getContext('2d'),W,H,particles=[],mouse={x:0,y:0};
 function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
 window.addEventListener('resize',resize);resize();
 document.addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY});
 for(var pi=0;pi<40;pi++)particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,r:Math.random()*2+.5,o:Math.random()*.15+.05});
-function drawParticles(){
-  ctx.clearRect(0,0,W,H);
-  particles.forEach(function(p){
-    p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
-    var dx=mouse.x-p.x,dy=mouse.y-p.y,dist=Math.sqrt(dx*dx+dy*dy);
-    var glow=dist<200?(.1*(1-dist/200)):0;
-    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle='rgba(90,173,45,'+(p.o+glow)+')';ctx.fill();
-    if(dist<120){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(mouse.x,mouse.y);ctx.strokeStyle='rgba(90,173,45,'+(0.03*(1-dist/120))+')';ctx.stroke()}
-  });
-  requestAnimationFrame(drawParticles);
-}
+function drawParticles(){ctx.clearRect(0,0,W,H);particles.forEach(function(p){p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;var dx=mouse.x-p.x,dy=mouse.y-p.y,dist=Math.sqrt(dx*dx+dy*dy);var glow=dist<200?(.1*(1-dist/200)):0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(90,173,45,'+(p.o+glow)+')';ctx.fill();if(dist<120){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(mouse.x,mouse.y);ctx.strokeStyle='rgba(90,173,45,'+(0.03*(1-dist/120))+')';ctx.stroke()}});requestAnimationFrame(drawParticles)}
 drawParticles();
 
-/* CONNECTION LINES */
 var svg=document.getElementById('connSvg'),diagram=document.getElementById('diagram');
-function drawConnections(){
-  var dRect=diagram.getBoundingClientRect(),cx=dRect.width/2,cy=dRect.height/2,svgHTML='';
-  document.querySelectorAll('.agent-node').forEach(function(node){
-    var nRect=node.getBoundingClientRect(),nx=nRect.left-dRect.left+nRect.width/2,ny=nRect.top-dRect.top+nRect.height/2;
-    svgHTML+='<line class="conn-line" x1="'+cx+'" y1="'+cy+'" x2="'+nx+'" y2="'+ny+'"/>';
-    var dur=(2+Math.random()*3).toFixed(1);
-    svgHTML+='<circle class="data-pulse" cx="'+cx+'" cy="'+cy+'" r="3"><animate attributeName="cx" from="'+cx+'" to="'+nx+'" dur="'+dur+'s" repeatCount="indefinite"/><animate attributeName="cy" from="'+cy+'" to="'+ny+'" dur="'+dur+'s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.6;0" dur="'+dur+'s" repeatCount="indefinite"/></circle>';
-  });
-  svg.innerHTML=svgHTML;
-}
-setTimeout(drawConnections,100);
-window.addEventListener('resize',function(){setTimeout(drawConnections,200)});
+function drawConnections(){var dRect=diagram.getBoundingClientRect(),cx=dRect.width/2,cy=dRect.height/2,svgHTML='';document.querySelectorAll('.agent-node').forEach(function(node){var nRect=node.getBoundingClientRect(),nx=nRect.left-dRect.left+nRect.width/2,ny=nRect.top-dRect.top+nRect.height/2;svgHTML+='<line class="conn-line" x1="'+cx+'" y1="'+cy+'" x2="'+nx+'" y2="'+ny+'"/>';var dur=(2+Math.random()*3).toFixed(1);svgHTML+='<circle class="data-pulse" cx="'+cx+'" cy="'+cy+'" r="3"><animate attributeName="cx" from="'+cx+'" to="'+nx+'" dur="'+dur+'s" repeatCount="indefinite"/><animate attributeName="cy" from="'+cy+'" to="'+ny+'" dur="'+dur+'s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.6;0" dur="'+dur+'s" repeatCount="indefinite"/></circle>'});svg.innerHTML=svgHTML}
+setTimeout(drawConnections,100);window.addEventListener('resize',function(){setTimeout(drawConnections,200)});
 
-/* SCROLL REVEAL */
 var revealObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){revealObs.observe(el)});
 setTimeout(function(){document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible')})},3000);
 
-/* CONTACT FORM */
-document.getElementById('contactForm').addEventListener('submit',function(e){
-  e.preventDefault();
-  var btn=document.getElementById('submitBtn'),n=document.getElementById('fname').value.trim(),em=document.getElementById('email').value.trim();
-  if(!n||!em)return;
-  btn.textContent='Enviando...';btn.disabled=true;
-  var subj=encodeURIComponent('[RegulatorIA] Consulta - '+n);
-  var body=encodeURIComponent('Nombre: '+n+' '+document.getElementById('lname').value+'\nEmail: '+em+'\nEmpresa: '+document.getElementById('company').value+'\nCargo: '+document.getElementById('role').value+'\nTipo: '+document.getElementById('orgtype').value+'\nMensaje: '+document.getElementById('msg').value);
-  window.location.href='mailto:proyectos@uranoia.cl?subject='+subj+'&body='+body;
-  setTimeout(function(){document.getElementById('formOk').style.display='block';btn.textContent='\u2713 Enviado';btn.style.background='linear-gradient(135deg,#065F46,#059669)'},500);
-});
+document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();var btn=document.getElementById('submitBtn'),n=document.getElementById('fname').value.trim(),em=document.getElementById('email').value.trim();if(!n||!em)return;btn.textContent='Enviando...';btn.disabled=true;var subj=encodeURIComponent('[RegulatorIA] Consulta - '+n);var body=encodeURIComponent('Nombre: '+n+' '+document.getElementById('lname').value+'\nEmail: '+em+'\nEmpresa: '+document.getElementById('company').value+'\nCargo: '+document.getElementById('role').value+'\nTipo: '+document.getElementById('orgtype').value+'\nMensaje: '+document.getElementById('msg').value);window.location.href='mailto:proyectos@uranoia.cl?subject='+subj+'&body='+body;setTimeout(function(){document.getElementById('formOk').style.display='block';btn.textContent='\u2713 Enviado';btn.style.background='linear-gradient(135deg,#065F46,#059669)'},500)});
 </script>
 </body>
 </html>
