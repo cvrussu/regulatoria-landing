@@ -92,8 +92,9 @@ a{text-decoration:none;color:inherit}
 .phase-post{border-color:rgba(234,88,12,0.4);color:#c2410c;background:rgba(234,88,12,0.06)}
 .phase-post:hover{box-shadow:0 8px 30px rgba(234,88,12,0.2)}
 .free-badge{position:absolute;top:-8px;right:-8px;background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;font-size:.55rem;font-weight:800;padding:3px 8px;border-radius:10px;letter-spacing:.04em;box-shadow:0 2px 8px rgba(37,99,235,0.3)}
+.stage2-badge{position:absolute;top:-8px;right:-8px;background:linear-gradient(135deg,#6b7280,#9ca3af);color:#fff;font-size:.55rem;font-weight:800;padding:3px 8px;border-radius:10px;letter-spacing:.04em;box-shadow:0 2px 8px rgba(107,114,128,0.3)}
 .agent-tooltip{position:fixed;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);border:1px solid var(--border-glow);border-radius:16px;padding:24px;max-width:320px;z-index:1000;pointer-events:none;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;box-shadow:0 12px 40px rgba(0,0,0,0.1)}
-.agent-tooltip.show{opacity:1;transform:translateY(0)}
+.agent-tooltip.show{opacity:1;transform:translateY(0);pointer-events:auto}
 .agent-tooltip h3{font-size:1rem;font-weight:800;margin-bottom:4px;color:var(--text-heading)}
 .agent-tooltip .tt-phase{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;display:inline-block;padding:3px 10px;border-radius:6px}
 .tt-pre{background:rgba(59,130,246,0.1);color:#1d4ed8}
@@ -124,6 +125,7 @@ a{text-decoration:none;color:inherit}
 .pc-reg .dot{background:var(--green)}
 .pc-post .dot{background:#ea580c}
 .free-tag{background:rgba(59,130,246,0.06);border-color:rgba(59,130,246,0.25);color:#1d4ed8}
+.stage2-tag{background:rgba(107,114,128,0.06);border-color:rgba(107,114,128,0.25);color:#4b5563;font-style:italic}
 
 /* PRICING COMPARISON - 3 columns */
 .pricing-section{padding:120px 0;position:relative;z-index:2;background:var(--bg2)}
@@ -143,6 +145,7 @@ a{text-decoration:none;color:inherit}
 .diff-badge{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:20px;font-size:.72rem;font-weight:800;letter-spacing:.02em;white-space:nowrap;flex-shrink:0}
 .diff-green{background:rgba(90,173,45,0.12);color:var(--green-dark)}
 .diff-free{background:linear-gradient(135deg,rgba(37,99,235,0.1),rgba(59,130,246,0.18));color:#1d4ed8;font-size:.78rem}
+.diff-stage2{background:rgba(107,114,128,0.12);color:#4b5563}
 .phase-separator td{background:rgba(43,90,20,0.04)!important;padding:10px 24px!important;font-size:.7rem!important;font-weight:700!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:var(--text-dim)!important}
 .phase-separator .ps-pre{color:#2563eb!important}
 .phase-separator .ps-reg{color:var(--green-dark)!important}
@@ -235,20 +238,20 @@ a{text-decoration:none;color:inherit}
 
 <section class="hero">
   <div class="hero-bg-carousel" id="heroBgCarousel">
-    <div class="hero-bg-slide active" data-label="Registro de Plaguicidas en Chile y LATAM"><img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&h=900&fit=crop&q=80" alt="Campos agr&iacute;colas"></div>
-    <div class="hero-bg-slide" data-label="An&aacute;lisis Toxicol&oacute;gico con IA"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1600&h=900&fit=crop&q=80" alt="Laboratorio"></div>
-    <div class="hero-bg-slide" data-label="11 Agentes de IA Especializados"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&h=900&fit=crop&q=80" alt="Tecnolog&iacute;a IA"></div>
-    <div class="hero-bg-slide" data-label="Dossier T&eacute;cnico Automatizado"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&h=900&fit=crop&q=80" alt="Documentaci&oacute;n"></div>
+    <div class="hero-bg-slide active" data-label="Registro de Plaguicidas en Chile y LATAM"><img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&h=900&fit=crop&q=80" alt="Campos agrícolas"></div>
+    <div class="hero-bg-slide" data-label="Análisis Toxicológico con IA"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1600&h=900&fit=crop&q=80" alt="Laboratorio"></div>
+    <div class="hero-bg-slide" data-label="11 Agentes de IA Especializados"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&h=900&fit=crop&q=80" alt="Tecnología IA"></div>
+    <div class="hero-bg-slide" data-label="Dossier Técnico Automatizado"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&h=900&fit=crop&q=80" alt="Documentación"></div>
     <div class="hero-bg-slide" data-label="Seguridad y Compliance Garantizados"><img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1600&h=900&fit=crop&q=80" alt="Compliance"></div>
     <div class="hero-bg-overlay"></div>
   </div>
   <div class="container">
     <div class="hero-content">
-      <div class="hero-badge">Primera en Chile &middot; Consultora AI-First</div>
-      <h1>La primera consultora de registro de agroqu&iacute;micos <span class="gradient">impulsada por IA.</span></h1>
+      <div class="hero-badge">Primera en Chile · Consultora AI-First</div>
+      <h1>La primera consultora de registro de agroquímicos <span class="gradient">impulsada por IA.</span></h1>
       <p class="lead">11 agentes de inteligencia artificial especializados trabajan en conjunto para automatizar el proceso completo de registro de plaguicidas en Chile y LATAM. Pre-registro gratuito.</p>
       <div class="hero-btns">
-        <a href="#contacto" class="btn-glow">Agenda una consulta &rarr;</a>
+        <a href="#contacto" class="btn-glow">Agenda una consulta →</a>
         <a href="#agentes" class="btn-ghost">Conoce los agentes</a>
       </div>
       <div class="carousel-nav" id="carouselDots"></div>
@@ -262,7 +265,7 @@ a{text-decoration:none;color:inherit}
     <div class="stats-grid">
       <div class="reveal"><div class="stat-num">11</div><div class="stat-label">Agentes IA especializados</div></div>
       <div class="reveal"><div class="stat-num">3</div><div class="stat-label">Agentes gratuitos</div></div>
-      <div class="reveal"><div class="stat-num">80%</div><div class="stat-label">Reducci&oacute;n de tiempos</div></div>
+      <div class="reveal"><div class="stat-num">80%</div><div class="stat-label">Reducción de tiempos</div></div>
       <div class="reveal"><div class="stat-num">24/7</div><div class="stat-label">Monitoreo regulatorio</div></div>
     </div>
   </div>
@@ -278,18 +281,21 @@ a{text-decoration:none;color:inherit}
     <div class="diagram-wrap" id="diagram">
       <svg class="connections-svg" id="connSvg"></svg>
       <div class="orq-ring r1"></div><div class="orq-ring r2"></div><div class="orq-ring r3"></div>
-      <div class="orq-center"><div class="orq-icon">&#x1F9E0;</div>ORQUESTADOR</div>
-      <div class="agent-node phase-pre" data-agent="vigilancia" style="top:2%;left:50%;transform:translate(-50%,0)"><span class="free-badge">GRATIS</span><div class="node-icon">&#x1F6E1;</div><div class="node-name">Vigilancia</div></div>
-      <div class="agent-node phase-pre" data-agent="clasificacion" style="top:10%;left:18%"><span class="free-badge">GRATIS</span><div class="node-icon">&#x1F50D;</div><div class="node-name">Clasificaci&oacute;n</div></div>
-      <div class="agent-node phase-pre" data-agent="normativo" style="top:10%;right:18%"><span class="free-badge">GRATIS</span><div class="node-icon">&#x2696;</div><div class="node-name">Normativo</div></div>
-      <div class="agent-node phase-reg" data-agent="estrategia" style="top:32%;left:2%"><div class="node-icon">&#x1F3AF;</div><div class="node-name">Estrategia</div></div>
-      <div class="agent-node phase-reg" data-agent="dossier" style="top:55%;left:2%"><div class="node-icon">&#x1F4C1;</div><div class="node-name">Dossier</div></div>
-      <div class="agent-node phase-reg" data-agent="toxicologia" style="top:32%;right:2%"><div class="node-icon">&#x2622;</div><div class="node-name">Toxicolog&iacute;a</div></div>
-      <div class="agent-node phase-reg" data-agent="eficacia" style="top:55%;right:2%"><div class="node-icon">&#x1F33E;</div><div class="node-name">Eficacia</div></div>
-      <div class="agent-node phase-reg" data-agent="etiquetado" style="bottom:18%;left:12%"><div class="node-icon">&#x1F3F7;</div><div class="node-name">Etiquetado</div></div>
-      <div class="agent-node phase-reg" data-agent="lmr" style="bottom:18%;right:12%"><div class="node-icon">&#x1F4CA;</div><div class="node-name">LMR</div></div>
-      <div class="agent-node phase-post" data-agent="qa" style="bottom:2%;left:28%"><div class="node-icon">&#x2705;</div><div class="node-name">QA</div></div>
-      <div class="agent-node phase-post" data-agent="comunicacion" style="bottom:2%;right:28%"><div class="node-icon">&#x1F4E8;</div><div class="node-name">Comunicaci&oacute;n</div></div>
+      <div class="orq-center"><div class="orq-icon">🧠</div>ORQUESTADOR</div>
+      <!-- FASE I: PRE-REGISTRO (5 agents) -->
+      <div class="agent-node phase-pre" data-agent="compass" style="top:2%;left:50%;transform:translate(-50%,0)"><span class="free-badge">GRATIS</span><div class="node-icon">🧭</div><div class="node-name">COMPASS</div></div>
+      <div class="agent-node phase-pre" data-agent="predict" style="top:10%;left:18%"><div class="node-icon">🔬</div><div class="node-name">PREDICT</div></div>
+      <div class="agent-node phase-pre" data-agent="genesis" style="top:10%;right:18%"><span class="stage2-badge">ETAPA 2</span><div class="node-icon">🧬</div><div class="node-name">GENESIS</div></div>
+      <div class="agent-node phase-pre" data-agent="scout" style="top:32%;left:2%"><span class="free-badge">GRATIS</span><div class="node-icon">🔍</div><div class="node-name">SCOUT</div></div>
+      <div class="agent-node phase-pre" data-agent="source" style="top:32%;right:2%"><span class="stage2-badge">ETAPA 2</span><div class="node-icon">🛡</div><div class="node-name">SOURCE</div></div>
+      <!-- FASE II: REGISTRO (4 agents) -->
+      <div class="agent-node phase-reg" data-agent="binder" style="top:55%;left:2%"><div class="node-icon">📁</div><div class="node-name">BINDER</div></div>
+      <div class="agent-node phase-reg" data-agent="auditor" style="top:55%;right:2%"><div class="node-icon">✅</div><div class="node-name">AUDITOR</div></div>
+      <div class="agent-node phase-reg" data-agent="defender" style="bottom:18%;left:12%"><span class="stage2-badge">ETAPA 2</span><div class="node-icon">⚖</div><div class="node-name">DEFENDER</div></div>
+      <div class="agent-node phase-reg" data-agent="scribe" style="bottom:18%;right:12%"><span class="free-badge">GRATIS</span><div class="node-icon">🏷</div><div class="node-name">SCRIBE</div></div>
+      <!-- FASE III: POST-REGISTRO (2 agents) -->
+      <div class="agent-node phase-post" data-agent="bridge" style="bottom:2%;left:28%"><span class="stage2-badge">ETAPA 2</span><div class="node-icon">🌍</div><div class="node-name">BRIDGE</div></div>
+      <div class="agent-node phase-post" data-agent="guard" style="bottom:2%;right:28%"><span class="stage2-badge">ETAPA 2</span><div class="node-icon">🔔</div><div class="node-name">GUARD</div></div>
     </div>
   </div>
 </section>
@@ -298,37 +304,37 @@ a{text-decoration:none;color:inherit}
   <div class="container">
     <div class="section-header center reveal">
       <div class="section-tag">Proceso</div>
-      <h2 class="section-title">Tres fases. Cero fricci&oacute;n.</h2>
-      <p class="section-sub">Desde la evaluaci&oacute;n inicial hasta el mantenimiento post-registro, cada fase tiene agentes dedicados.</p>
+      <h2 class="section-title">Tres fases. Cero fricción.</h2>
+      <p class="section-sub">Desde la evaluación inicial hasta el mantenimiento post-registro, cada fase tiene agentes dedicados.</p>
     </div>
     <div class="phases-grid">
       <div class="phase-card pc-pre reveal">
-        <div class="pc-label">Fase 01 &middot; Pre-Registro</div>
-        <div class="pc-title">Evaluaci&oacute;n y preparaci&oacute;n</div>
+        <div class="pc-label">Fase I · Pre-Registro</div>
+        <div class="pc-title">Evaluación y preparación</div>
         <div class="pc-agents-list">
-          <span class="pc-tag free-tag"><span class="dot"></span>Vigilancia Regulatoria</span>
-          <span class="pc-tag free-tag"><span class="dot"></span>Clasificaci&oacute;n Regulatoria</span>
-          <span class="pc-tag free-tag"><span class="dot"></span>An&aacute;lisis Normativo</span>
+          <span class="pc-tag free-tag"><span class="dot"></span>🧭 COMPASS — The Navigator</span>
+          <span class="pc-tag"><span class="dot"></span>🔬 PREDICT — The Lab</span>
+          <span class="pc-tag stage2-tag"><span class="dot"></span>🧬 GENESIS — The Architect</span>
+          <span class="pc-tag free-tag"><span class="dot"></span>🔍 SCOUT — The Spy</span>
+          <span class="pc-tag stage2-tag"><span class="dot"></span>🛡 SOURCE — The Gatekeeper</span>
         </div>
       </div>
       <div class="phase-card pc-reg reveal">
-        <div class="pc-label">Fase 02 &middot; Registro</div>
-        <div class="pc-title">Compilaci&oacute;n y presentaci&oacute;n</div>
+        <div class="pc-label">Fase II · Registro</div>
+        <div class="pc-title">Compilación y presentación</div>
         <div class="pc-agents-list">
-          <span class="pc-tag"><span class="dot"></span>Estrategia de Registro</span>
-          <span class="pc-tag"><span class="dot"></span>Dossier T&eacute;cnico</span>
-          <span class="pc-tag"><span class="dot"></span>Toxicolog&iacute;a</span>
-          <span class="pc-tag"><span class="dot"></span>Eficacia Agron&oacute;mica</span>
-          <span class="pc-tag"><span class="dot"></span>Etiquetado y SDS</span>
-          <span class="pc-tag"><span class="dot"></span>LMR</span>
+          <span class="pc-tag"><span class="dot"></span>📁 BINDER — The Organizer</span>
+          <span class="pc-tag"><span class="dot"></span>✅ AUDITOR — The Reviewer</span>
+          <span class="pc-tag stage2-tag"><span class="dot"></span>⚖ DEFENDER — The Lawyer</span>
+          <span class="pc-tag free-tag"><span class="dot"></span>🏷 SCRIBE — The Publisher</span>
         </div>
       </div>
       <div class="phase-card pc-post reveal">
-        <div class="pc-label">Fase 03 &middot; Post-Registro</div>
+        <div class="pc-label">Fase III · Post-Registro</div>
         <div class="pc-title">Mantenimiento y cumplimiento</div>
         <div class="pc-agents-list">
-          <span class="pc-tag"><span class="dot"></span>QA / Compliance</span>
-          <span class="pc-tag"><span class="dot"></span>Comunicaci&oacute;n Regulatoria</span>
+          <span class="pc-tag stage2-tag"><span class="dot"></span>🌍 BRIDGE — The Globalizer</span>
+          <span class="pc-tag stage2-tag"><span class="dot"></span>🔔 GUARD — The Sentinel</span>
         </div>
       </div>
     </div>
@@ -340,81 +346,81 @@ a{text-decoration:none;color:inherit}
     <div class="section-header center reveal">
       <div class="section-tag">Comparativa por Servicio</div>
       <h2 class="section-title">Consultora tradicional vs. Consultora IA</h2>
-      <p class="section-sub">Cada servicio comparado: misma calidad, fracci&oacute;n del tiempo y costo. Pre-registro completamente gratuito.</p>
+      <p class="section-sub">Cada servicio comparado: misma calidad, fracción del tiempo y costo. Pre-registro completamente gratuito.</p>
     </div>
 
     <table class="compare-table reveal">
       <thead>
         <tr>
-          <th>Servicio</th>
+          <th>Servicio (Agente)</th>
           <th class="th-trad">Consultora Tradicional</th>
           <th class="th-ia">RegulatorIA (IA)</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="phase-separator"><td colspan="3"><span class="ps-pre">Fase 01 &middot; Pre-Registro</span></td></tr>
+        <tr class="phase-separator"><td colspan="3"><span class="ps-pre">Fase I · Pre-Registro</span></td></tr>
         <tr>
-          <td>Vigilancia Regulatoria</td>
-          <td class="td-trad">Revisi&oacute;n manual peri&oacute;dica</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Monitoreo automatizado 24/7</span><span class="diff-badge diff-free">GRATIS</span></div></td>
+          <td>🧭 COMPASS — Requisitos Regulatorios</td>
+          <td class="td-trad">Consulta manual por jurisdicción</td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">GPS regulatorio dinámico</span><span class="diff-badge diff-free">GRATIS</span></div></td>
         </tr>
         <tr>
-          <td>Clasificaci&oacute;n Regulatoria</td>
-          <td class="td-trad">1-2 semanas, cobro por hora</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Minutos, autom&aacute;tico</span><span class="diff-badge diff-free">GRATIS</span></div></td>
+          <td>🔬 PREDICT — Toxicología in silico</td>
+          <td class="td-trad">Estudios externos (€50k-200k)</td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Predicciones QSAR automáticas</span><span class="diff-badge diff-green">-80% costo</span></div></td>
         </tr>
         <tr>
-          <td>An&aacute;lisis Normativo</td>
-          <td class="td-trad">Consulta por hora profesional</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Respuesta instant&aacute;nea con cita legal</span><span class="diff-badge diff-free">GRATIS</span></div></td>
-        </tr>
-        <tr class="phase-separator"><td colspan="3"><span class="ps-reg">Fase 02 &middot; Registro</span></td></tr>
-        <tr>
-          <td>Estrategia de Registro</td>
-          <td class="td-trad">2-4 semanas</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">2-3 d&iacute;as</span><span class="diff-badge diff-green">5x m&aacute;s r&aacute;pido</span></div></td>
+          <td>🧬 GENESIS — Diseño de Moléculas</td>
+          <td class="td-trad">No existe equivalente</td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Safe-by-Design generativo</span><span class="diff-badge diff-stage2">Etapa 2</span></div></td>
         </tr>
         <tr>
-          <td>Dossier T&eacute;cnico</td>
-          <td class="td-trad">4-8 semanas</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">1-2 semanas</span><span class="diff-badge diff-green">4x m&aacute;s r&aacute;pido</span></div></td>
+          <td>🔍 SCOUT — Inteligencia Regulatoria</td>
+          <td class="td-trad">Revisión manual periódica</td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Monitoreo 24/7 automatizado</span><span class="diff-badge diff-free">GRATIS</span></div></td>
         </tr>
         <tr>
-          <td>An&aacute;lisis Toxicol&oacute;gico</td>
-          <td class="td-trad">Costo base alto (estudios externos)</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">QSAR + modelado IA</span><span class="diff-badge diff-green">-80% costo</span></div></td>
+          <td>🛡 SOURCE — Auditoría CoA</td>
+          <td class="td-trad">Revisión manual de certificados</td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Detección automática de impurezas</span><span class="diff-badge diff-stage2">Etapa 2</span></div></td>
+        </tr>
+        <tr class="phase-separator"><td colspan="3"><span class="ps-reg">Fase II · Registro</span></td></tr>
+        <tr>
+          <td>📁 BINDER — Gestión Documental</td>
+          <td class="td-trad">4-8 semanas compilación manual</td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Dashboard completitud + Document AI</span><span class="diff-badge diff-green">4x más rápido</span></div></td>
         </tr>
         <tr>
-          <td>Eficacia Agron&oacute;mica</td>
-          <td class="td-trad">3-6 semanas de an&aacute;lisis</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">1 semana automatizada</span><span class="diff-badge diff-green">4x m&aacute;s r&aacute;pido</span></div></td>
+          <td>✅ AUDITOR — Revisión GLP/OECD</td>
+          <td class="td-trad">Revisión manual (2-4 semanas)</td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">3 niveles automáticos, >90% aprobación</span><span class="diff-badge diff-green">5x más rápido</span></div></td>
         </tr>
         <tr>
-          <td>Etiquetado y SDS</td>
+          <td>⚖ DEFENDER — Defensas Técnicas</td>
+          <td class="td-trad">Abogados externos ($$$)</td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Defensas IA ante objeciones</span><span class="diff-badge diff-stage2">Etapa 2</span></div></td>
+        </tr>
+        <tr>
+          <td>🏷 SCRIBE — SDS y Etiquetas</td>
           <td class="td-trad">2-3 semanas por producto</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">2-3 d&iacute;as por producto</span><span class="diff-badge diff-green">5x m&aacute;s r&aacute;pido</span></div></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">SDS 16 secciones + CLP/GHS, 30+ idiomas</span><span class="diff-badge diff-free">GRATIS</span></div></td>
+        </tr>
+        <tr class="phase-separator"><td colspan="3"><span class="ps-post">Fase III · Post-Registro</span></td></tr>
+        <tr>
+          <td>🌍 BRIDGE — Armonización Global</td>
+          <td class="td-trad">Registro país por país (lineal)</td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Adapta dossier ANVISA/EPA/ECHA</span><span class="diff-badge diff-stage2">Etapa 2</span></div></td>
         </tr>
         <tr>
-          <td>An&aacute;lisis LMR</td>
-          <td class="td-trad">Revisi&oacute;n manual Codex + local</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Cruce autom&aacute;tico multi-base</span><span class="diff-badge diff-green">-75% costo</span></div></td>
-        </tr>
-        <tr class="phase-separator"><td colspan="3"><span class="ps-post">Fase 03 &middot; Post-Registro</span></td></tr>
-        <tr>
-          <td>QA / Compliance</td>
-          <td class="td-trad">Auditor&iacute;a peri&oacute;dica (trimestral)</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Monitoreo continuo automatizado</span><span class="diff-badge diff-green">24/7</span></div></td>
-        </tr>
-        <tr>
-          <td>Comunicaci&oacute;n Regulatoria</td>
-          <td class="td-trad">Gesti&oacute;n manual de oficios</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Generaci&oacute;n y seguimiento autom&aacute;tico</span><span class="diff-badge diff-green">3x m&aacute;s r&aacute;pido</span></div></td>
+          <td>🔔 GUARD — Vigilancia de Licencias</td>
+          <td class="td-trad">Auditoría periódica (trimestral)</td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Alertas Email→SMS→Bloqueo ERP</span><span class="diff-badge diff-stage2">Etapa 2</span></div></td>
         </tr>
         <tr class="phase-separator"><td colspan="3"><span>Resumen Global</span></td></tr>
         <tr class="summary-row">
           <td>Tiempo total por registro</td>
           <td class="td-trad">12-24 meses</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">3-6 meses</span><span class="diff-badge diff-green">4x m&aacute;s r&aacute;pido</span></div></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">3-6 meses</span><span class="diff-badge diff-green">4x más rápido</span></div></td>
         </tr>
         <tr class="summary-row">
           <td>Tasa de errores documentales</td>
@@ -424,78 +430,78 @@ a{text-decoration:none;color:inherit}
         <tr class="summary-row">
           <td>Costo total por producto</td>
           <td class="td-trad">Base ($$$$)</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Fracci&oacute;n del costo</span><span class="diff-badge diff-green">-60% a -80%</span></div></td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Fracción del costo</span><span class="diff-badge diff-green">-60% a -80%</span></div></td>
         </tr>
         <tr class="summary-row">
-          <td>Escalabilidad (multi-pa&iacute;s)</td>
-          <td class="td-trad">Lineal: m&aacute;s equipo por pa&iacute;s</td>
-          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Paralelo: mismos agentes</span><span class="diff-badge diff-green">&#x221e; escalable</span></div></td>
+          <td>Escalabilidad (multi-país)</td>
+          <td class="td-trad">Lineal: más equipo por país</td>
+          <td class="td-ia"><div class="td-ia-content"><span class="td-ia-text">Paralelo: mismos agentes</span><span class="diff-badge diff-green">∞ escalable</span></div></td>
         </tr>
       </tbody>
     </table>
 
     <div class="compare-mobile">
       <div class="cm-card reveal">
-        <div class="cm-service">Vigilancia Regulatoria</div>
-        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Manual, peri&oacute;dica</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">24/7 automatizada <span class="diff-badge diff-free">GRATIS</span></span></div>
+        <div class="cm-service">🧭 COMPASS — Requisitos Regulatorios</div>
+        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Consulta manual</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">GPS regulatorio <span class="diff-badge diff-free">GRATIS</span></span></div>
       </div>
       <div class="cm-card reveal">
-        <div class="cm-service">Clasificaci&oacute;n Regulatoria</div>
-        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">1-2 semanas</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Minutos <span class="diff-badge diff-free">GRATIS</span></span></div>
+        <div class="cm-service">🔬 PREDICT — Toxicología in silico</div>
+        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">€50k-200k estudios</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">QSAR automático <span class="diff-badge diff-green">-80%</span></span></div>
       </div>
       <div class="cm-card reveal">
-        <div class="cm-service">An&aacute;lisis Normativo</div>
-        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Cobro por hora</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Instant&aacute;neo <span class="diff-badge diff-free">GRATIS</span></span></div>
+        <div class="cm-service">🧬 GENESIS — Diseño de Moléculas</div>
+        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">No existe</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Safe-by-Design <span class="diff-badge diff-stage2">Etapa 2</span></span></div>
       </div>
       <div class="cm-card reveal">
-        <div class="cm-service">Estrategia de Registro</div>
-        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">2-4 semanas</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">2-3 d&iacute;as <span class="diff-badge diff-green">5x</span></span></div>
+        <div class="cm-service">🔍 SCOUT — Inteligencia Regulatoria</div>
+        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Manual, periódica</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">24/7 automatizado <span class="diff-badge diff-free">GRATIS</span></span></div>
       </div>
       <div class="cm-card reveal">
-        <div class="cm-service">Dossier T&eacute;cnico</div>
+        <div class="cm-service">🛡 SOURCE — Auditoría CoA</div>
+        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Revisión manual</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Detección automática <span class="diff-badge diff-stage2">Etapa 2</span></span></div>
+      </div>
+      <div class="cm-card reveal">
+        <div class="cm-service">📁 BINDER — Gestión Documental</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">4-8 semanas</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">1-2 semanas <span class="diff-badge diff-green">4x</span></span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Document AI <span class="diff-badge diff-green">4x</span></span></div>
       </div>
       <div class="cm-card reveal">
-        <div class="cm-service">An&aacute;lisis Toxicol&oacute;gico</div>
-        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Costo alto</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">QSAR + IA <span class="diff-badge diff-green">-80%</span></span></div>
+        <div class="cm-service">✅ AUDITOR — Revisión GLP/OECD</div>
+        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">2-4 semanas</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">3 niveles, >90% <span class="diff-badge diff-green">5x</span></span></div>
       </div>
       <div class="cm-card reveal">
-        <div class="cm-service">Eficacia Agron&oacute;mica</div>
-        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">3-6 semanas</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">1 semana <span class="diff-badge diff-green">4x</span></span></div>
+        <div class="cm-service">⚖ DEFENDER — Defensas Técnicas</div>
+        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Abogados ($$$)</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Defensas IA <span class="diff-badge diff-stage2">Etapa 2</span></span></div>
       </div>
       <div class="cm-card reveal">
-        <div class="cm-service">Etiquetado y SDS</div>
+        <div class="cm-service">🏷 SCRIBE — SDS y Etiquetas</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">2-3 semanas</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">2-3 d&iacute;as <span class="diff-badge diff-green">5x</span></span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">CLP/GHS 30+ idiomas <span class="diff-badge diff-free">GRATIS</span></span></div>
       </div>
       <div class="cm-card reveal">
-        <div class="cm-service">An&aacute;lisis LMR</div>
-        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Revisi&oacute;n manual</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Cruce autom&aacute;tico <span class="diff-badge diff-green">-75%</span></span></div>
+        <div class="cm-service">🌍 BRIDGE — Armonización Global</div>
+        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">País por país</span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">ANVISA/EPA/ECHA <span class="diff-badge diff-stage2">Etapa 2</span></span></div>
       </div>
       <div class="cm-card reveal">
-        <div class="cm-service">QA / Compliance</div>
+        <div class="cm-service">🔔 GUARD — Vigilancia de Licencias</div>
         <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Trimestral</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Continuo <span class="diff-badge diff-green">24/7</span></span></div>
-      </div>
-      <div class="cm-card reveal">
-        <div class="cm-service">Comunicaci&oacute;n Regulatoria</div>
-        <div class="cm-row"><span class="cm-label">Tradicional</span><span class="cm-val trad">Manual</span></div>
-        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Automatizada <span class="diff-badge diff-green">3x</span></span></div>
+        <div class="cm-row"><span class="cm-label">RegulatorIA</span><span class="cm-val ia">Email→SMS→ERP <span class="diff-badge diff-stage2">Etapa 2</span></span></div>
       </div>
       <div class="cm-card reveal" style="border-color:var(--green);background:rgba(90,173,45,0.02)">
         <div class="cm-service" style="color:var(--green-dark)">Resumen Global</div>
         <div class="cm-row"><span class="cm-label">Tiempo total</span><span class="cm-val ia">3-6 meses <span class="diff-badge diff-green">4x</span></span></div>
         <div class="cm-row"><span class="cm-label">Errores</span><span class="cm-val ia">&lt;2% <span class="diff-badge diff-green">-90%</span></span></div>
-        <div class="cm-row"><span class="cm-label">Costo total</span><span class="cm-val ia">Fracci&oacute;n <span class="diff-badge diff-green">-60% a -80%</span></span></div>
-        <div class="cm-row"><span class="cm-label">Escalabilidad</span><span class="cm-val ia">Paralelo <span class="diff-badge diff-green">&#x221e;</span></span></div>
+        <div class="cm-row"><span class="cm-label">Costo total</span><span class="cm-val ia">Fracción <span class="diff-badge diff-green">-60% a -80%</span></span></div>
+        <div class="cm-row"><span class="cm-label">Escalabilidad</span><span class="cm-val ia">Paralelo <span class="diff-badge diff-green">∞</span></span></div>
       </div>
     </div>
   </div>
@@ -505,7 +511,7 @@ a{text-decoration:none;color:inherit}
   <div class="container">
     <div class="cta-box reveal">
       <h2>Agenda una consulta gratuita</h2>
-      <p>Descubre c&oacute;mo nuestros 11 agentes de IA pueden transformar tu proceso de registro. 3 agentes de pre-registro totalmente gratuitos.</p>
+      <p>Descubre cómo nuestros 11 agentes de IA pueden transformar tu proceso de registro. 3 agentes de pre-registro totalmente gratuitos.</p>
       <form class="contact-form" id="contactForm">
         <div class="form-row">
           <div class="form-group"><label>Nombre *</label><input type="text" id="fname" placeholder="Tu nombre" required></div>
@@ -517,21 +523,21 @@ a{text-decoration:none;color:inherit}
           <div class="form-group"><label>Cargo</label><input type="text" id="role" placeholder="Director regulatorio, etc."></div>
         </div>
         <div class="form-group">
-          <label>Tipo de organizaci&oacute;n</label>
+          <label>Tipo de organización</label>
           <select id="orgtype">
             <option value="">Selecciona...</option>
-            <option>Empresa agroqu&iacute;mica</option>
+            <option>Empresa agroquímica</option>
             <option>Consultora regulatoria</option>
-            <option>Asociaci&oacute;n / Federaci&oacute;n</option>
+            <option>Asociación / Federación</option>
             <option>Organismo regulador</option>
             <option>Distribuidora / Importadora</option>
             <option>Otra</option>
           </select>
         </div>
-        <div class="form-group"><label>Mensaje</label><textarea id="msg" placeholder="Cu&eacute;ntanos sobre tu necesidad regulatoria..."></textarea></div>
-        <button type="submit" class="form-submit" id="submitBtn">Agendar consulta gratuita &rarr;</button>
+        <div class="form-group"><label>Mensaje</label><textarea id="msg" placeholder="Cuéntanos sobre tu necesidad regulatoria..."></textarea></div>
+        <button type="submit" class="form-submit" id="submitBtn">Agendar consulta gratuita →</button>
         <p class="form-note">Te contactamos en menos de 24 horas.</p>
-        <div class="form-success" id="formOk">&#10003; &iexcl;Mensaje enviado! Te contactaremos pronto.</div>
+        <div class="form-success" id="formOk">✓ ¡Mensaje enviado! Te contactaremos pronto.</div>
       </form>
     </div>
   </div>
@@ -547,7 +553,7 @@ a{text-decoration:none;color:inherit}
         <a href="#comparativa">Comparativa</a>
         <a href="mailto:proyectos@uranoia.cl">proyectos@uranoia.cl</a>
       </div>
-      <div class="footer-copy">&copy; 2026 Urano IA SpA &middot; proyectos@uranoia.cl &middot; +56 9 8144 0854</div>
+      <div class="footer-copy">© 2026 Urano IA SpA · proyectos@uranoia.cl · +56 9 8144 0854</div>
     </div>
   </div>
 </footer>
@@ -561,9 +567,31 @@ function goSlide(n){bgSlides[currentBg].classList.remove('active');currentBg=((n
 function resetBgTimer(){clearInterval(bgTimer);bgTimer=setInterval(function(){goSlide(currentBg+1)},5000)}
 resetBgTimer();
 
-var agents={vigilancia:{name:"Agente de Vigilancia Regulatoria",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Monitorea cambios normativos en SAG, ISP, Diario Oficial y SEREMI en tiempo real.",free:true},clasificacion:{name:"Agente de Clasificaci\u00f3n Regulatoria",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Determina la categor\u00eda regulatoria del producto y la entidad reguladora correspondiente.",free:true},normativo:{name:"Agente de An\u00e1lisis Normativo",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Analiza legislaci\u00f3n vigente. Responde consultas regulatorias citando la norma aplicable.",free:true},estrategia:{name:"Agente de Estrategia de Registro",phase:"Registro",phaseClass:"tt-reg",desc:"Define la ruta regulatoria \u00f3ptima para cada producto en cada jurisdicci\u00f3n."},dossier:{name:"Agente de Dossier T\u00e9cnico",phase:"Registro",phaseClass:"tt-reg",desc:"Compila y estructura la documentaci\u00f3n t\u00e9cnica del expediente seg\u00fan formatos SAG."},toxicologia:{name:"Agente de Toxicolog\u00eda",phase:"Registro",phaseClass:"tt-reg",desc:"Analiza perfiles toxicol\u00f3gicos y evaluaci\u00f3n de riesgo conforme a marcos OECD y EPA."},eficacia:{name:"Agente de Eficacia Agron\u00f3mica",phase:"Registro",phaseClass:"tt-reg",desc:"Eval\u00faa datos de campo y genera informes t\u00e9cnicos para el expediente."},etiquetado:{name:"Agente de Etiquetado y SDS",phase:"Registro",phaseClass:"tt-reg",desc:"Genera etiquetas GHS/CLP y hojas de datos de seguridad seg\u00fan normativa vigente."},lmr:{name:"Agente de LMR",phase:"Registro",phaseClass:"tt-reg",desc:"Calcula y verifica L\u00edmites M\u00e1ximos de Residuos vs. Codex Alimentarius y regulaciones locales."},qa:{name:"Agente de QA / Compliance",phase:"Post-Registro",phaseClass:"tt-post",desc:"Auditor\u00eda autom\u00e1tica de documentaci\u00f3n y vigencias post-registro."},comunicacion:{name:"Agente de Comunicaci\u00f3n Regulatoria",phase:"Post-Registro",phaseClass:"tt-post",desc:"Genera oficios, respuestas y seguimiento de tr\u00e1mites con autoridades."}};
+var agents={
+  compass:{name:"COMPASS \u2014 The Navigator",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Motor de requisitos regulatorios din\u00e1micos. GPS del cumplimiento global. Selecciona Tipo Producto + Pa\u00eds \u2192 Lista de Chequeo Oficial. Tech: Knowledge Graphs, RAG, NLP Regulatorio.",free:true,demo:"https://cvrussu.github.io/regulatoria-agentes/compass.html"},
+  predict:{name:"PREDICT \u2014 The Lab",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Laboratorio virtual de toxicolog\u00eda in silico. Predicciones QSAR, genera QMRF autom\u00e1tico. Tech: Graph Neural Networks, Read-Across, Ensemble Models."},
+  genesis:{name:"GENESIS \u2014 The Architect",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Dise\u00f1o generativo de mol\u00e9culas Safe-by-Design. Tech: Diffusion Models + RL. Etapa 2."},
+  scout:{name:"SCOUT \u2014 The Spy",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Inteligencia regulatoria. Monitorea bases globales, prohibiciones, nuevos requisitos. Tech: NLP + Web Scraping.",free:true,demo:"https://cvrussu.github.io/regulatoria-agentes/scout.html"},
+  source:{name:"SOURCE \u2014 The Gatekeeper",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Auditor\u00eda de Certificados de An\u00e1lisis (CoA). Detecta impurezas. Tech: OCR + Anomaly Detection. Etapa 2."},
+  binder:{name:"BINDER \u2014 The Organizer",phase:"Registro",phaseClass:"tt-reg",desc:"Gestor documental inteligente. Conecta SharePoint/Drive, clasifica con Document AI, dashboard completitud. Tech: LayoutLM v3, Cross-Reference Engine."},
+  auditor:{name:"AUDITOR \u2014 The Reviewer",phase:"Registro",phaseClass:"tt-reg",desc:"Revisor autom\u00e1tico GLP/OECD. 3 niveles: consistencia, cumplimiento, completitud. Tasa aprobaci\u00f3n >90%. Tech: Fact-Checking, Semantic Similarity."},
+  defender:{name:"DEFENDER \u2014 The Lawyer",phase:"Registro",phaseClass:"tt-reg",desc:"Defensas t\u00e9cnicas ante objeciones regulatorias. Tech: Fine-Tuned LLMs litigio. Etapa 2."},
+  scribe:{name:"SCRIBE \u2014 The Publisher",phase:"Registro",phaseClass:"tt-reg",desc:"SDS 16 secciones + etiquetas CLP/GHS autom\u00e1ticas. Motor CLP (CE 1272/2008), GHS Rev.9. 30+ idiomas. Tech: Rule-Based Engine + LLM + PDF Rendering.",free:true,demo:"https://cvrussu.github.io/regulatoria-agentes/scribe.html"},
+  bridge:{name:"BRIDGE \u2014 The Globalizer",phase:"Post-Registro",phaseClass:"tt-post",desc:"Armonizaci\u00f3n global de dossiers. Recicla estudios, adapta formato ANVISA/EPA/ECHA. \u20ac5,000/pa\u00eds. Etapa 2."},
+  guard:{name:"GUARD \u2014 The Sentinel",phase:"Post-Registro",phaseClass:"tt-post",desc:"Vigilancia perpetua de licencias. Alertas escalonadas Email\u2192SMS\u2192Bloqueo ERP. Etapa 2."}
+};
 var tooltip=document.getElementById('tooltip');
-document.querySelectorAll('.agent-node').forEach(function(node){node.addEventListener('mouseenter',function(e){var a=agents[node.dataset.agent];if(!a)return;tooltip.innerHTML='<span class="tt-phase '+a.phaseClass+'">'+a.phase+(a.free?' \u00b7 GRATIS':'')+'</span><h3>'+a.name+'</h3><p>'+a.desc+'</p>';tooltip.classList.add('show')});node.addEventListener('mousemove',function(e){tooltip.style.left=Math.min(e.clientX+16,window.innerWidth-340)+'px';tooltip.style.top=(e.clientY+16)+'px'});node.addEventListener('mouseleave',function(){tooltip.classList.remove('show')})});
+document.querySelectorAll('.agent-node').forEach(function(node){
+  node.addEventListener('mouseenter',function(e){
+    var a=agents[node.dataset.agent];if(!a)return;
+    var html='<span class="tt-phase '+a.phaseClass+'">'+a.phase+(a.free?' \u00b7 GRATIS':'')+'</span><h3>'+a.name+'</h3><p>'+a.desc+'</p>';
+    if(a.demo){html+='<a href="'+a.demo+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;padding:8px 16px;background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;border-radius:8px;font-size:.8rem;font-weight:700;text-decoration:none">Probar Gratis \u2192</a>';}
+    tooltip.innerHTML=html;
+    tooltip.classList.add('show');
+  });
+  node.addEventListener('mousemove',function(e){tooltip.style.left=Math.min(e.clientX+16,window.innerWidth-340)+'px';tooltip.style.top=(e.clientY+16)+'px'});
+  node.addEventListener('mouseleave',function(){tooltip.classList.remove('show')});
+});
 
 var canvas=document.getElementById('particles'),ctx=canvas.getContext('2d'),W,H,particles=[],mouse={x:0,y:0};
 function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
