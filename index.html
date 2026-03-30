@@ -189,8 +189,7 @@ a{text-decoration:none;color:inherit}
 .footer-links a{font-size:.85rem;color:var(--text-dim);transition:color .3s}
 .footer-links a:hover{color:var(--green)}
 .footer-copy{width:100%;text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);font-size:.78rem;color:var(--text-dim)}
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal{opacity:0;transform:translateY(40px)}
 
 @media(max-width:1024px){
   .hero h1{font-size:2.8rem}
@@ -560,13 +559,19 @@ a{text-decoration:none;color:inherit}
 
 <div class="agent-tooltip" id="tooltip"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 <script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Carousel (unchanged logic) ── */
 var bgSlides=document.querySelectorAll('.hero-bg-slide'),slideLabel=document.getElementById('slideLabel'),dotsContainer=document.getElementById('carouselDots'),currentBg=0,bgTimer,totalBg=bgSlides.length;
 for(var i=0;i<totalBg;i++){var d=document.createElement('button');d.className='carousel-dot'+(i===0?' active':'');d.setAttribute('aria-label','Slide '+(i+1));(function(idx){d.onclick=function(){goSlide(idx)}})(i);dotsContainer.appendChild(d)}
 function goSlide(n){bgSlides[currentBg].classList.remove('active');currentBg=((n%totalBg)+totalBg)%totalBg;bgSlides[currentBg].classList.add('active');var dots=document.querySelectorAll('.carousel-dot');for(var j=0;j<dots.length;j++){dots[j].className=j===currentBg?'carousel-dot active':'carousel-dot'}var label=bgSlides[currentBg].getAttribute('data-label');slideLabel.style.opacity='0';setTimeout(function(){slideLabel.textContent=label;slideLabel.style.opacity='1'},300);resetBgTimer()}
 function resetBgTimer(){clearInterval(bgTimer);bgTimer=setInterval(function(){goSlide(currentBg+1)},5000)}
 resetBgTimer();
 
+/* ── Agents data (unchanged) ── */
 var agents={
   compass:{name:"COMPASS \u2014 The Navigator",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Motor de requisitos regulatorios din\u00e1micos. GPS del cumplimiento global. Selecciona Tipo Producto + Pa\u00eds \u2192 Lista de Chequeo Oficial. Tech: Knowledge Graphs, RAG, NLP Regulatorio.",free:true,demo:"https://cvrussu.github.io/regulatoria-agentes/compass.html"},
   predict:{name:"PREDICT \u2014 The Lab",phase:"Pre-Registro",phaseClass:"tt-pre",desc:"Laboratorio virtual de toxicolog\u00eda in silico. Predicciones QSAR, genera QMRF autom\u00e1tico. Tech: Graph Neural Networks, Read-Across, Ensemble Models."},
@@ -593,6 +598,7 @@ document.querySelectorAll('.agent-node').forEach(function(node){
   node.addEventListener('mouseleave',function(){tooltip.classList.remove('show')});
 });
 
+/* ── Particles (unchanged) ── */
 var canvas=document.getElementById('particles'),ctx=canvas.getContext('2d'),W,H,particles=[],mouse={x:0,y:0};
 function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
 window.addEventListener('resize',resize);resize();
@@ -601,15 +607,165 @@ for(var pi=0;pi<40;pi++)particles.push({x:Math.random()*W,y:Math.random()*H,vx:(
 function drawParticles(){ctx.clearRect(0,0,W,H);particles.forEach(function(p){p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;var dx=mouse.x-p.x,dy=mouse.y-p.y,dist=Math.sqrt(dx*dx+dy*dy);var glow=dist<200?(.1*(1-dist/200)):0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(90,173,45,'+(p.o+glow)+')';ctx.fill();if(dist<120){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(mouse.x,mouse.y);ctx.strokeStyle='rgba(90,173,45,'+(0.03*(1-dist/120))+')';ctx.stroke()}});requestAnimationFrame(drawParticles)}
 drawParticles();
 
+/* ── SVG Connections (unchanged) ── */
 var svg=document.getElementById('connSvg'),diagram=document.getElementById('diagram');
 function drawConnections(){var dRect=diagram.getBoundingClientRect(),cx=dRect.width/2,cy=dRect.height/2,svgHTML='';document.querySelectorAll('.agent-node').forEach(function(node){var nRect=node.getBoundingClientRect(),nx=nRect.left-dRect.left+nRect.width/2,ny=nRect.top-dRect.top+nRect.height/2;svgHTML+='<line class="conn-line" x1="'+cx+'" y1="'+cy+'" x2="'+nx+'" y2="'+ny+'"/>';var dur=(2+Math.random()*3).toFixed(1);svgHTML+='<circle class="data-pulse" cx="'+cx+'" cy="'+cy+'" r="3"><animate attributeName="cx" from="'+cx+'" to="'+nx+'" dur="'+dur+'s" repeatCount="indefinite"/><animate attributeName="cy" from="'+cy+'" to="'+ny+'" dur="'+dur+'s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.6;0" dur="'+dur+'s" repeatCount="indefinite"/></circle>'});svg.innerHTML=svgHTML}
 setTimeout(drawConnections,100);window.addEventListener('resize',function(){setTimeout(drawConnections,200)});
 
-var revealObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(function(el){revealObs.observe(el)});
-setTimeout(function(){document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible')})},3000);
-
+/* ── Contact form (unchanged) ── */
 document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();var btn=document.getElementById('submitBtn'),n=document.getElementById('fname').value.trim(),em=document.getElementById('email').value.trim();if(!n||!em)return;btn.textContent='Enviando...';btn.disabled=true;var subj=encodeURIComponent('[RegulatorIA] Consulta - '+n);var body=encodeURIComponent('Nombre: '+n+' '+document.getElementById('lname').value+'\nEmail: '+em+'\nEmpresa: '+document.getElementById('company').value+'\nCargo: '+document.getElementById('role').value+'\nTipo: '+document.getElementById('orgtype').value+'\nMensaje: '+document.getElementById('msg').value);window.location.href='mailto:proyectos@uranoia.cl?subject='+subj+'&body='+body;setTimeout(function(){document.getElementById('formOk').style.display='block';btn.textContent='\u2713 Enviado';btn.style.background='linear-gradient(135deg,#065F46,#059669)'},500)});
+
+/* ══════════════════════════════════════════
+   GSAP ANIMATIONS — powered by gsap-skills
+   ══════════════════════════════════════════ */
+
+/* ── Accessibility: respect prefers-reduced-motion ── */
+var mm = gsap.matchMedia();
+
+mm.add("(prefers-reduced-motion: no-preference)", function() {
+
+  /* ── 1. HERO — staggered entrance ── */
+  var heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  heroTl
+    .from(".hero-badge", { y: 30, autoAlpha: 0, duration: 0.8 })
+    .from(".hero h1", { y: 50, autoAlpha: 0, duration: 1 }, "-=0.4")
+    .from(".hero .lead", { y: 30, autoAlpha: 0, duration: 0.8 }, "-=0.5")
+    .from(".hero-btns .btn-glow", { x: -30, autoAlpha: 0, duration: 0.6 }, "-=0.4")
+    .from(".hero-btns .btn-ghost", { x: 30, autoAlpha: 0, duration: 0.6 }, "-=0.5")
+    .from(".carousel-nav", { autoAlpha: 0, duration: 0.5 }, "-=0.3")
+    .from(".slide-label", { autoAlpha: 0, duration: 0.5 }, "-=0.3");
+
+  /* ── 2. NAV — slide down on load ── */
+  gsap.from(".nav", { y: -80, autoAlpha: 0, duration: 0.8, ease: "power2.out", delay: 0.2 });
+
+  /* ── 3. STATS — counter animation + stagger ── */
+  var statNums = document.querySelectorAll('.stat-num');
+  statNums.forEach(function(el) {
+    var text = el.textContent.trim();
+    var suffix = text.replace(/[\d.]+/, '');
+    var num = parseFloat(text);
+    if (isNaN(num)) return;
+    var obj = { val: 0 };
+    gsap.to(obj, {
+      val: num,
+      duration: 2,
+      ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 85%" },
+      onUpdate: function() {
+        el.textContent = (num % 1 !== 0 ? obj.val.toFixed(0) : Math.round(obj.val)) + suffix;
+      }
+    });
+  });
+
+  gsap.from(".stats .reveal", {
+    y: 40, autoAlpha: 0, duration: 0.8, stagger: 0.15, ease: "power2.out",
+    scrollTrigger: { trigger: ".stats", start: "top 80%" }
+  });
+
+  /* ── 4. DIAGRAM SECTION — header + rings + center + agent nodes ── */
+  gsap.from(".diagram-section .section-header", {
+    y: 50, autoAlpha: 0, duration: 0.9, ease: "power2.out",
+    scrollTrigger: { trigger: ".diagram-section", start: "top 75%" }
+  });
+
+  gsap.from(".orq-center", {
+    scale: 0, autoAlpha: 0, duration: 1, ease: "back.out(1.7)",
+    scrollTrigger: { trigger: ".diagram-wrap", start: "top 75%" }
+  });
+
+  gsap.from(".orq-ring", {
+    scale: 0, autoAlpha: 0, duration: 1.2, stagger: 0.2, ease: "power2.out",
+    scrollTrigger: { trigger: ".diagram-wrap", start: "top 75%" }
+  });
+
+  gsap.from(".agent-node", {
+    scale: 0, autoAlpha: 0, duration: 0.6, stagger: { each: 0.08, from: "random" },
+    ease: "back.out(1.4)",
+    scrollTrigger: { trigger: ".diagram-wrap", start: "top 70%" }
+  });
+
+  /* ── 5. PHASES — cards stagger from bottom ── */
+  gsap.from(".phases-grid .section-header", {
+    y: 50, autoAlpha: 0, duration: 0.9, ease: "power2.out",
+    scrollTrigger: { trigger: "#fases", start: "top 75%" }
+  });
+
+  gsap.from(".phase-card", {
+    y: 60, autoAlpha: 0, duration: 0.8, stagger: 0.2, ease: "power2.out",
+    scrollTrigger: { trigger: ".phases-grid", start: "top 80%" }
+  });
+
+  /* ── 6. PRICING TABLE — header + rows slide in ── */
+  gsap.from(".pricing-section .section-header", {
+    y: 50, autoAlpha: 0, duration: 0.9, ease: "power2.out",
+    scrollTrigger: { trigger: ".pricing-section", start: "top 75%" }
+  });
+
+  gsap.from(".compare-table", {
+    y: 40, autoAlpha: 0, duration: 1, ease: "power2.out",
+    scrollTrigger: { trigger: ".compare-table", start: "top 85%" }
+  });
+
+  gsap.from(".compare-table tbody tr:not(.phase-separator)", {
+    x: -30, autoAlpha: 0, duration: 0.5, stagger: 0.06, ease: "power2.out",
+    scrollTrigger: { trigger: ".compare-table tbody", start: "top 85%" }
+  });
+
+  /* Mobile comparison cards */
+  gsap.from(".cm-card", {
+    y: 40, autoAlpha: 0, duration: 0.6, stagger: 0.1, ease: "power2.out",
+    scrollTrigger: { trigger: ".compare-mobile", start: "top 85%" }
+  });
+
+  /* ── 7. CTA SECTION — scale entrance ── */
+  gsap.from(".cta-box", {
+    scale: 0.9, autoAlpha: 0, duration: 1, ease: "power3.out",
+    scrollTrigger: { trigger: ".cta-section", start: "top 75%" }
+  });
+
+  gsap.from(".contact-form", {
+    y: 30, autoAlpha: 0, duration: 0.8, ease: "power2.out", delay: 0.3,
+    scrollTrigger: { trigger: ".cta-box", start: "top 70%" }
+  });
+
+  /* ── 8. FOOTER — fade up ── */
+  gsap.from(".footer-inner", {
+    y: 20, autoAlpha: 0, duration: 0.6, ease: "power2.out",
+    scrollTrigger: { trigger: ".footer", start: "top 90%" }
+  });
+
+  /* ── 9. SECTION HEADERS (.reveal) — universal ScrollTrigger ── */
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    /* Skip elements already animated by specific ScrollTriggers above */
+    if (el.closest('.stats') || el.closest('.phases-grid') || el.closest('.compare-mobile') || el.closest('.cta-section')) return;
+    gsap.from(el, {
+      y: 40, autoAlpha: 0, duration: 0.8, ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 85%" }
+    });
+  });
+
+  /* ── 10. PHASE CARD TAGS — stagger on hover ── */
+  document.querySelectorAll('.phase-card').forEach(function(card) {
+    var tags = card.querySelectorAll('.pc-tag');
+    card.addEventListener('mouseenter', function() {
+      gsap.fromTo(tags, { scale: 0.95 }, { scale: 1, duration: 0.3, stagger: 0.04, ease: "back.out(2)" });
+    });
+  });
+
+  /* ── 11. DIFF BADGES — pulse on scroll ── */
+  gsap.from(".diff-badge", {
+    scale: 0, autoAlpha: 0, duration: 0.4, stagger: 0.05, ease: "back.out(1.7)",
+    scrollTrigger: { trigger: ".compare-table tbody", start: "top 85%" }
+  });
+
+}); /* end matchMedia */
+
+/* Reduced motion fallback: just show everything */
+mm.add("(prefers-reduced-motion: reduce)", function() {
+  gsap.set(".reveal, .hero-badge, .hero h1, .hero .lead, .hero-btns, .carousel-nav, .slide-label, .nav, .stat-num, .orq-center, .orq-ring, .agent-node, .phase-card, .compare-table, .compare-table tbody tr, .cm-card, .cta-box, .contact-form, .footer-inner, .diff-badge", {
+    autoAlpha: 1, y: 0, x: 0, scale: 1
+  });
+});
 </script>
 </body>
 </html>
