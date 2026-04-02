@@ -1,5 +1,6 @@
 import { Composition } from "remotion";
 import { RegulatoriaVideo } from "./RegulatoriaVideo";
+import { LogoAnimation } from "./LogoAnimation";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -15,6 +16,14 @@ export const RemotionRoot: React.FC = () => {
           title: "RegulatorIA",
           subtitle: "Primera Consultora de Registro de Agroquímicos con IA",
         }}
+      />
+      <Composition
+        id="LogoAnimation"
+        component={LogoAnimation}
+        durationInFrames={150}
+        fps={30}
+        width={1920}
+        height={1080}
       />
     </>
   );
