@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RegulatorIA - Logo Animation Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0d1520; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
+canvas { display: block; }
+#replay-btn { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #0d9488, #0f766e); color: #fff; border: none; padding: 12px 28px; border-radius: 10px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; cursor: pointer; opacity: 0; transition: opacity 0.5s; }
+#replay-btn.show { opacity: 1; }
+#replay-btn:hover { box-shadow: 0 4px 20px rgba(13,148,136,0.5); transform: translateY(-1px); }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<button id="replay-btn" onclick="restart()">Replay</button>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const W = 1920, H = 1080;
+canvas.width = W; canvas.height = H;
+
+// Scale canvas to fit viewport
+function resize() {
+  const s = Math.min(window.innerWidth / W, window.innerHeight / H);
+  canvas.style.width = (W * s) + 'px';
+  canvas.style.height = (H * s) + 'px';
+}
+resize();
+window.addEventListener('resize', resize);
+
+const FPS = 30, TOTAL = 150;
+let frame = 0, startTime = null, playing = true;
+
+// Colors
+const NAVY_DEEP = '#0d1520';
+const NAVY = '#1a2744';
+const TEAL = '#0d9488';
+const TEAL_DARK = '#0f766e';
+const TEAL_LIGHT = '#2dd4bf';
+const GREEN = '#5AAD2D';
+
+// Shield path points (centered at cx, cy)
+const cx = W / 2, cy = 400;
+const shieldScale = 1.8;
+function shieldPoints() {
+  const pts = [
+    [0, -130], [120, -100], [130, -20], [130, 70], [80, 130], [0, 160],
+    [-80, 130], [-130, 70], [-130, -20], [-120, -100]
+  ];
+  return pts.map(([x, y]) => [cx + x * shieldScale, cy + y * shieldScale]);
+}
+const SHIELD = shieldPoints();
+
+// Molecular nodes (relative to shield center)
+const NODES = [
+  { x: cx, y: cy - 80 * shieldScale },
+  { x: cx + 80 * shieldScale, y: cy + 10 * shieldScale },
+  { x: cx + 30 * shieldScale, y: cy + 90 * shieldScale },
+  { x: cx - 70 * shieldScale, y: cy + 30 * shieldScale },
+];
+const EDGES = [[0,1],[1,2],[2,3],[3,0],[0,2]];
+
+// Particles
+const particles = Array.from({length: 10}, (_, i) => ({
+  x: 200 + i * 170 + (i%3)*50,
+  y: 100 + (i%4)*220 + (i%2)*80,
+  size: 1.5 + (i%3),
+  speed: 0.02 + (i%5)*0.006,
+  offset: i * 1.3,
+}));
+
+// Easing functions
+function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+function spring(t) {
+  if (t <= 0) return 0;
+  if (t >= 1) return 1;
+  return 1 - Math.exp(-6 * t) * Math.cos(8 * t);
+}
+function clamp01(t) { return Math.max(0, Math.min(1, t)); }
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+// Draw shield path with progress (0-1)
+function drawShieldPath(progress) {
+  if (progress <= 0) return;
+  const pts = SHIELD;
+  const totalPts = pts.length;
+  const endIdx = progress * totalPts;
+
+  ctx.beginPath();
+  ctx.moveTo(pts[0][0], pts[0][1]);
+  for (let i = 1; i <= Math.min(Math.floor(endIdx), totalPts); i++) {
+    const idx = i % totalPts;
+    if (i < endIdx) {
+      ctx.lineTo(pts[idx][0], pts[idx][1]);
+    } else {
+      const frac = endIdx - Math.floor(endIdx);
+      const prev = pts[(i - 1) % totalPts];
+      const curr = pts[idx];
+      ctx.lineTo(lerp(prev[0], curr[0], frac), lerp(prev[1], curr[1], frac));
+    }
+  }
+  if (progress >= 1) ctx.closePath();
+}
+
+// Fill shield
+function fillShield(opacity) {
+  if (opacity <= 0) return;
+  ctx.save();
+  ctx.globalAlpha = opacity;
+  ctx.beginPath();
+  ctx.moveTo(SHIELD[0][0], SHIELD[0][1]);
+  for (let i = 1; i < SHIELD.length; i++) ctx.lineTo(SHIELD[i][0], SHIELD[i][1]);
+  ctx.closePath();
+  ctx.fillStyle = NAVY;
+  ctx.fill();
+  ctx.restore();
+}
+
+function render(f) {
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = NAVY_DEEP;
+  ctx.fillRect(0, 0, W, H);
+
+  // Phase 1: Background grid (frames 0-20+)
+  const gridOpacity = clamp01(f / 20) * 0.08;
+  if (gridOpacity > 0) {
+    ctx.save();
+    ctx.globalAlpha = gridOpacity;
+    for (let x = 25; x < W; x += 50) {
+      for (let y = 25; y < H; y += 50) {
+        ctx.beginPath();
+        ctx.arc(x, y, 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = TEAL;
+        ctx.fill();
+      }
+    }
+    ctx.restore();
+  }
+
+  // Floating particles
+  const pOpacity = clamp01((f - 5) / 20) * 0.4;
+  if (pOpacity > 0) {
+    particles.forEach((p, i) => {
+      const px = p.x + Math.sin(f * p.speed + p.offset) * 30;
+      const py = p.y + Math.cos(f * p.speed * 0.7 + p.offset) * 20;
+      ctx.save();
+      ctx.globalAlpha = pOpacity * (0.3 + (i % 3) * 0.2);
+      ctx.beginPath();
+      ctx.arc(px, py, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = TEAL;
+      ctx.fill();
+      ctx.restore();
+    });
+  }
+
+  // Radial vignette
+  const vigGrad = ctx.createRadialGradient(W/2, H*0.45, H*0.25, W/2, H*0.45, H*0.7);
+  vigGrad.addColorStop(0, 'transparent');
+  vigGrad.addColorStop(1, 'rgba(13,21,32,0.6)');
+  ctx.fillStyle = vigGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Phase 3: Shield fill (frames 40-60)
+  const fillOp = clamp01((f - 40) / 20);
+  fillShield(fillOp);
+
+  // Phase 2: Shield stroke draw (frames 10-50)
+  const drawProgress = clamp01((f - 10) / 40);
+  if (drawProgress > 0) {
+    // Glow layer
+    ctx.save();
+    ctx.shadowColor = TEAL_LIGHT;
+    ctx.shadowBlur = 15;
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = TEAL_LIGHT;
+    ctx.globalAlpha = clamp01((f - 50) / 15) * 0.5 * (f > 130 ? Math.sin(f * 0.08) * 0.15 + 0.85 : 1);
+    drawShieldPath(drawProgress);
+    ctx.stroke();
+    ctx.restore();
+
+    // Main stroke
+    ctx.save();
+    ctx.shadowColor = TEAL;
+    ctx.shadowBlur = 8;
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = TEAL;
+    ctx.globalAlpha = 0.9;
+    drawShieldPath(drawProgress);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Phase 5: Connection lines (frames 60-90)
+  EDGES.forEach(([a, b], i) => {
+    const lineStart = 60 + i * 5;
+    const progress = clamp01((f - lineStart) / 15);
+    if (progress <= 0) return;
+
+    const x1 = NODES[a].x, y1 = NODES[a].y;
+    const x2 = NODES[b].x, y2 = NODES[b].y;
+    const ex = lerp(x1, x2, progress);
+    const ey = lerp(y1, y2, progress);
+
+    ctx.save();
+    ctx.globalAlpha = 0.5;
+    ctx.strokeStyle = TEAL;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(ex, ey);
+    ctx.stroke();
+    ctx.restore();
+  });
+
+  // Phase 6: Energy pulses (frames 85-110)
+  EDGES.forEach(([a, b], i) => {
+    const pulseStart = 85 + i * 5;
+    const t = clamp01((f - pulseStart) / 15);
+    if (t <= 0 || f > pulseStart + 20) return;
+
+    const px = lerp(NODES[a].x, NODES[b].x, t);
+    const py = lerp(NODES[a].y, NODES[b].y, t);
+    const op = t < 0.9 ? 1 : (1 - t) / 0.1;
+
+    ctx.save();
+    ctx.globalAlpha = op * 0.9;
+    ctx.shadowColor = TEAL_LIGHT;
+    ctx.shadowBlur = 10;
+    ctx.beginPath();
+    ctx.arc(px, py, 5, 0, Math.PI * 2);
+    ctx.fillStyle = TEAL_LIGHT;
+    ctx.fill();
+    ctx.restore();
+  });
+
+  // Ambient pulses (frames 130+)
+  if (f > 130) {
+    EDGES.slice(0, 3).forEach(([a, b], i) => {
+      const cycle = 40;
+      const lf = ((f - 130 + i * 12) % cycle);
+      const t = lf / cycle;
+      const px = lerp(NODES[a].x, NODES[b].x, t);
+      const py = lerp(NODES[a].y, NODES[b].y, t);
+      const op = t < 0.1 ? t / 0.1 : t > 0.9 ? (1 - t) / 0.1 : 1;
+
+      ctx.save();
+      ctx.globalAlpha = op * 0.4;
+      ctx.shadowColor = TEAL_LIGHT;
+      ctx.shadowBlur = 8;
+      ctx.beginPath();
+      ctx.arc(px, py, 3, 0, Math.PI * 2);
+      ctx.fillStyle = TEAL_LIGHT;
+      ctx.fill();
+      ctx.restore();
+    });
+  }
+
+  // Phase 4: Molecular nodes (frames 50-85)
+  NODES.forEach((node, i) => {
+    const nodeAppear = 50 + i * 8;
+    if (f < nodeAppear) return;
+    const t = clamp01((f - nodeAppear) / 12);
+    const scale = spring(t);
+
+    // Hit pulse
+    const hitFrame = 85 + i * 5 + 15;
+    let hitScale = 1;
+    if (f >= hitFrame && f <= hitFrame + 8) {
+      hitScale = 1 + spring(clamp01((f - hitFrame) / 8)) * 0.15;
+    }
+
+    const r = 12 * scale * hitScale;
+
+    // Outer glow
+    ctx.save();
+    ctx.globalAlpha = 0.2 * scale;
+    ctx.shadowColor = TEAL;
+    ctx.shadowBlur = 15;
+    ctx.beginPath();
+    ctx.arc(node.x, node.y, r + 6, 0, Math.PI * 2);
+    ctx.fillStyle = TEAL;
+    ctx.fill();
+    ctx.restore();
+
+    // Main node
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
+    ctx.fillStyle = TEAL;
+    ctx.fill();
+    ctx.strokeStyle = TEAL_LIGHT;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.restore();
+
+    // Inner highlight
+    ctx.save();
+    ctx.globalAlpha = 0.6;
+    ctx.beginPath();
+    ctx.arc(node.x, node.y, 4 * scale, 0, Math.PI * 2);
+    ctx.fillStyle = TEAL_LIGHT;
+    ctx.fill();
+    ctx.restore();
+  });
+
+  // Phase 7: Leaf sprout on node 3 (frames 82-100)
+  if (f >= 82) {
+    const lt = clamp01((f - 82) / 18);
+    const lScale = spring(lt);
+    const n = NODES[3];
+
+    ctx.save();
+    ctx.translate(n.x - 10, n.y - 14);
+    ctx.scale(lScale, lScale);
+    const rot = lerp(-0.35, 0, lt);
+    ctx.rotate(rot);
+
+    // Stem
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(-6, -28);
+    ctx.strokeStyle = TEAL_LIGHT;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    // Leaf 1
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo(-10, -20, -28, -32, -18, -48);
+    ctx.bezierCurveTo(-12, -36, 4, -30, 0, 0);
+    ctx.fillStyle = TEAL_LIGHT;
+    ctx.globalAlpha = 0.8;
+    ctx.fill();
+
+    // Leaf 2 (smaller, green)
+    ctx.save();
+    ctx.translate(3, -14);
+    ctx.rotate(0.7);
+    ctx.scale(0.55, 0.55);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo(-10, -20, -28, -32, -18, -48);
+    ctx.bezierCurveTo(-12, -36, 4, -30, 0, 0);
+    ctx.fillStyle = GREEN;
+    ctx.globalAlpha = 0.7;
+    ctx.fill();
+    ctx.restore();
+
+    ctx.restore();
+  }
+
+  // Phase 8: "Regulator." text (frames 90-120)
+  const text = "Regulator.";
+  const fontSize = 80;
+  ctx.font = `700 ${fontSize}px Inter, sans-serif`;
+  const textY = cy + 210 * shieldScale;
+  const textMetrics = ctx.measureText(text + "IA");
+  const totalTextW = textMetrics.width;
+  let textX = cx - totalTextW / 2 + 30;
+
+  for (let i = 0; i < text.length; i++) {
+    const charStart = 90 + i * 3;
+    const charOp = clamp01((f - charStart) / 6);
+    const charYoff = lerp(14, 0, easeOut(clamp01((f - charStart) / 6)));
+
+    if (charOp > 0) {
+      ctx.save();
+      ctx.globalAlpha = charOp;
+      ctx.fillStyle = TEAL_DARK;
+      ctx.font = `700 ${fontSize}px Inter, sans-serif`;
+      ctx.fillText(text[i], textX, textY + charYoff);
+      ctx.restore();
+    }
+    textX += ctx.measureText(text[i]).width;
+  }
+
+  // Phase 9: "IA" with tech effect (frames 115-135)
+  const iaStart = textX + 4;
+  const iaOp = clamp01((f - 115) / 5);
+  const isGlitch = f >= 120 && f <= 125;
+  const glitchY = isGlitch ? (f % 2 === 0 ? -3 : 3) : 0;
+  const glitchX = isGlitch ? (f % 3 === 0 ? 2 : -2) : 0;
+
+  if (iaOp > 0) {
+    // Glow behind
+    const glowOp = f > 135 ? (Math.sin(f * 0.1) * 0.1 + 0.25) : clamp01((f - 125) / 10) * 0.6;
+    ctx.save();
+    ctx.globalAlpha = iaOp * glowOp;
+    ctx.shadowColor = TEAL_LIGHT;
+    ctx.shadowBlur = 20;
+    ctx.fillStyle = TEAL_LIGHT;
+    ctx.font = `800 ${fontSize}px Inter, sans-serif`;
+    ctx.letterSpacing = '3px';
+    ctx.fillText("IA", iaStart + glitchX, textY + glitchY);
+    ctx.restore();
+
+    // Main IA text
+    ctx.save();
+    ctx.globalAlpha = iaOp;
+    ctx.fillStyle = TEAL_DARK;
+    ctx.font = `800 ${fontSize}px Inter, sans-serif`;
+    ctx.fillText("IA", iaStart + glitchX, textY + glitchY);
+    ctx.restore();
+
+    // Scan line (frames 115-127)
+    if (f >= 115 && f <= 127) {
+      const scanT = clamp01((f - 115) / 10);
+      const scanOp = f < 122 ? clamp01((f - 115) / 5) : clamp01((127 - f) / 5);
+      const iaW = ctx.measureText("IA").width + 10;
+      const scanX = iaStart + scanT * iaW;
+
+      ctx.save();
+      ctx.globalAlpha = scanOp;
+      const scanGrad = ctx.createLinearGradient(scanX, textY - fontSize, scanX, textY + 10);
+      scanGrad.addColorStop(0, 'transparent');
+      scanGrad.addColorStop(0.5, TEAL_LIGHT);
+      scanGrad.addColorStop(1, 'transparent');
+      ctx.fillStyle = scanGrad;
+      ctx.shadowColor = TEAL_LIGHT;
+      ctx.shadowBlur = 12;
+      ctx.fillRect(scanX, textY - fontSize, 3, fontSize + 10);
+      ctx.restore();
+    }
+  }
+
+  // Ambient halo (frames 130+)
+  if (f > 130) {
+    const haloOp = 0.04 + Math.sin(f * 0.06) * 0.02;
+    const haloGrad = ctx.createRadialGradient(cx, cy - 20, 0, cx, cy - 20, 500);
+    haloGrad.addColorStop(0, `rgba(13,148,136,${haloOp})`);
+    haloGrad.addColorStop(1, 'transparent');
+    ctx.fillStyle = haloGrad;
+    ctx.fillRect(0, 0, W, H);
+  }
+}
+
+function animate(ts) {
+  if (!startTime) startTime = ts;
+  frame = Math.floor((ts - startTime) / (1000 / FPS));
+
+  if (frame >= TOTAL) {
+    frame = TOTAL - 1;
+    render(frame);
+    document.getElementById('replay-btn').classList.add('show');
+    return;
+  }
+
+  render(frame);
+  requestAnimationFrame(animate);
+}
+
+function restart() {
+  startTime = null;
+  frame = 0;
+  document.getElementById('replay-btn').classList.remove('show');
+  requestAnimationFrame(animate);
+}
+
+// Wait for font to load
+document.fonts.ready.then(() => {
+  requestAnimationFrame(animate);
+});
+</script>
+</body>
+</html>
