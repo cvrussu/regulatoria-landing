@@ -1,0 +1,15 @@
+{
+  "name": "bank-extractor",
+  "version": "1.0.0",
+  "description": "Extractor de movimientos bancarios chilenos",
+  "type": "module",
+  "scripts": {
+    "start": "node extract.js",
+    "extract": "node extract.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "open-banking-chile": "^2.1.2"
+  }
+}
