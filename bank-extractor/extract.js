@@ -80,6 +80,8 @@ async function main() {
     result = await bank.scrape({
       rut: creds.rut,
       password: creds.password,
+      chromePath: process.env.CHROME_PATH,
+      extraArgs: ["--ignore-certificate-errors"],
       onProgress: (msg) => console.log(`  ⏳ ${msg}`),
     });
   } catch (err) {
